@@ -60,7 +60,7 @@ That's it, you can run your application and test it !! :)
 
 ## Versioning
 
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/adrien2p/nestjs-modules-dialogflow/tags). 
+We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/adrien2p/nestjs-dialogflow/tags). 
 
 ## Authors
 
