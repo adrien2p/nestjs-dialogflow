@@ -51,6 +51,9 @@ export class MyDialogFlowComponent {
 }
 ```
 
+Inside the `DialogFlowModule` a middleware is apply in order to validate the token sent by `dialogFlow`, so when your start
+your server, you will have to sent the `DIALOG_FLOW_AUTHORIZATION_TOKEN` env variable.
+
 That's it, you can run your application and test it !! :)
 
 ## Built With
