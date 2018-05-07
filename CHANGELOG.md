@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [1.1.0] - 2018-05-07
+
+### Update
+
+* `DialogFlowModule` now apply the `DialogFlowAuthorizationMiddleware` middleware to validate the token sent by `DialogFlow`
+
+### Added
+
+* `DialogFlowAuthorizationMiddleware` the middleware compare the token sent by `DialogFlow` to the token set in the env variable
+`DIALOG_FLOW_AUTHORIZATION_TOKEN`
+
 ## [1.0.1] - 2018-05-07
 
 ### Update
