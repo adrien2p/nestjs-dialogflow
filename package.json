@@ -1,0 +1,38 @@
+{
+  "name": "@nestjs-modules/dialogflow",
+  "version": "1.0.0",
+  "description": "Dialog flow module that simplify the web hook handling for your NLP application using NestJS :satellite:",
+  "author": "Adrien de Peretti",
+  "license": "MIT",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "homepage": "https://github.com/adrien2p/nestjs-modules-dialogflow#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/adrien2p/nestjs-modules-dialogflow"
+  },
+  "bugs": {
+    "url": "https://github.com/adrien2p/nestjs-modules-dialogflow/issues"
+  },
+  "engines": {
+    "node": ">= 8.9.0"
+  },
+  "scripts": {
+    "format": "prettier lib/**/*.ts --write",
+    "build": "tsc -p tsconfig.json",
+    "prepublish:npm": "npm run build",
+    "publish:npm": "npm publish --access public"
+  },
+  "devDependencies": {
+    "@nestjs/common": "^4.6.6",
+    "@nestjs/core": "^4.6.6",
+    "@types/node": "^7.0.41",
+    "@types/reflect-metadata": "^0.1.12",
+    "prettier": "^1.12.1",
+    "reflect-metadata": "^0.1.12"
+  },
+  "peerDependencies": {
+    "@nestjs/common": "^4.6.6",
+    "@nestjs/core": "^4.6.6"
+  }
+}
