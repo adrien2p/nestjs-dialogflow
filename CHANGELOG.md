@@ -27,8 +27,8 @@ Change project name.
 ### Added
 
 * Decorators to handle the intent/action sent from `DialogFlow`
-  * `@DialogFlowIntent()` decorator to define the concerned intent instead of the action.
-  * `@DialogFlowAction() `decorator to define the concerned action instead of the intent.
+  * `@DialogFlowIntent()` decorator to define the concerned intent instead of the action
+  * `@DialogFlowAction() `decorator to define the concerned action instead of the intent
 * `DialogFlowModule` Which provide the features
   * `DialogFlowController` configurable controller through `DialogFlowModule.forRoute(webHookConfig)`
   * `Handlers` provider which get the metadata from the components in order to store and return the handlers map
