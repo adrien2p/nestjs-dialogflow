@@ -30,7 +30,7 @@ After that, you have to go to your dialogFlow account to set up the url that sho
 your NLP request into the `Fulfillment` section of your agent. The url with the default config should looks like `https://myurl.me/web-hooks/dialog-flow`
 
 To handle the triggered intent, you can create your own component that will implement all the methods that should handle
-and `intent` or an `action``
+and `intent` or an `action`
 
 ```ts
 @Component()
