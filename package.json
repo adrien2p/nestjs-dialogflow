@@ -1,6 +1,6 @@
 {
   "name": "nestjs-dialogflow",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Dialog flow module that simplify the web hook handling for your NLP application using NestJS :satellite:",
   "keywords": [
     "NestJS",
