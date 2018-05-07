@@ -6,7 +6,7 @@ Dialog flow module that simplify the web hook handling for your NLP application 
 
 To start using this module you should run the following command
 
-`npm i @nestjs-modules/dialogflow @nestjs/common @nestjs/core reflect-metadata`
+`npm i nestjs-dialogflow @nestjs/common @nestjs/core reflect-metadata`
 
 ### How to use it
 

@@ -1,5 +1,5 @@
 {
-  "name": "@nestjs-modules/dialogflow",
+  "name": "nestjs-dialogflow",
   "version": "1.0.0",
   "description": "Dialog flow module that simplify the web hook handling for your NLP application using NestJS :satellite:",
   "author": "Adrien de Peretti",
@@ -34,5 +34,8 @@
   "peerDependencies": {
     "@nestjs/common": "^4.6.6",
     "@nestjs/core": "^4.6.6"
+  },
+  "dependencies": {
+    "npm": "^6.0.0"
   }
 }
