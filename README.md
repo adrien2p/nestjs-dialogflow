@@ -27,7 +27,7 @@ export class ApplicationModule { }
 ```
 
 After that, you have to go to your dialogFlow account to set up the url that should be reach to provide the result of
-your NLP request into the `Fulfillment` section of your agent.
+your NLP request into the `Fulfillment` section of your agent. The url with the default config should looks like `https://myurl.me/web-hooks/dialog-flow
 
 To handle the triggered intent, you can create your own component that will implement all the methods that should handle
 and `intent` or an `action``
@@ -37,13 +37,13 @@ and `intent` or an `action``
 export class MyDialogFlowComponent {
     
     @DialogFlowIntent('My:intent1')
-    public async handleEventDebug(dialogFlowResponse: DialogFlowResponse): Promise<DialogFlowFulfillmentResponse> {
+    public async handleMyIntent1(dialogFlowResponse: DialogFlowResponse): Promise<DialogFlowFulfillmentResponse> {
         /* Your code here */
         return {} as DialogFlowFulfillmentResponse;
     }
 
     @DialogFlowIntent('My:intent2')
-    public async handleEventDebug2(dialogFlowResponse: DialogFlowResponse): Promise<DialogFlowFulfillmentResponse> {
+    public async handleMyIntent2(dialogFlowResponse: DialogFlowResponse): Promise<DialogFlowFulfillmentResponse> {
         /* Your code here */
         return {} as DialogFlowFulfillmentResponse;
     }
