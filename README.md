@@ -1,6 +1,6 @@
-# DialogFlow module for NestJS
+# DialogFlow module for NestJS :satellite:
 
-Dialog flow module that simplify the web hook handling for your NLP application using NestJS :satellite:
+Dialog flow module that simplify the web hook handling for your NLP application using NestJS
 
 ## Getting Started
 
