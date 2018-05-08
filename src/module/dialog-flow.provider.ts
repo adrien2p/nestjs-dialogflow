@@ -1,5 +1,5 @@
 import 'reflect-metadata';
-import { DIALOG_FLOW_INTENT, nestMetadata } from '../constant';
+import { DIALOG_FLOW_ACTION, DIALOG_FLOW_INTENT, nestMetadata } from '../constant';
 import { MetadataScanner } from '@nestjs/core/metadata-scanner';
 import { ModulesContainer } from '@nestjs/core/injector';
 
@@ -16,13 +16,15 @@ export const provider = {
 
             components.map(component => {
                 const reflectedMetadata = metadataScanner.scanFromPrototype(null, component.prototype, method => {
+                    const intentOrAction = Reflect.getMetadata(DIALOG_FLOW_INTENT, component.prototype[method]) ||
+                        Reflect.getMetadata(DIALOG_FLOW_ACTION, component.prototype[method]);
                     return {
                         handler: component.prototype[method],
-                        intentOrAction: Reflect.getMetadata(DIALOG_FLOW_INTENT, component.prototype[method])
+                        intentOrAction
                     }
                 });
                 [...reflectedMetadata].forEach(metadata => {
-                    handlers.set(metadata.intentOrAction, metadata.handler)
+                    handlers.set(metadata.intentOrAction, metadata.handler);
                 });
             });
         });

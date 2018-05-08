@@ -18,7 +18,8 @@ export class DialogController {
         const intent = dialogFlowResponse.queryResult.intent.displayName;
         const action = dialogFlowResponse.queryResult.action;
 
-        const handler = this.handlers.get(intent);
+        console.log(intent, action);
+        const handler = this.handlers.get(intent) || this.handlers.get(action);
         if (!handler) {
             throw new Error(`Unknown handler for ${intent ? `intent ${intent}.` : (action ? `action ${action}.` : 'an undefined intent and/or action.')}`);
         }
