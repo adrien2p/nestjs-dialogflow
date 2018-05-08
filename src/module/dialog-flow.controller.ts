@@ -4,14 +4,14 @@ import { METHOD_METADATA, PATH_METADATA } from '../constant';
 import { WebHookConfig } from '../interfaces/web-hook-config.interface';
 
 @Controller()
-export class DialogController {
+export class DialogFlowController {
     constructor(@Inject('Handlers') private readonly handlers: Map<string, any>) { }
 
     public static forRoute(webHookConfig: WebHookConfig) {
-        Reflect.defineMetadata(PATH_METADATA, webHookConfig.basePath, DialogController);
-        Reflect.defineMetadata(PATH_METADATA, webHookConfig.postPath, Object.getOwnPropertyDescriptor(DialogController.prototype, 'dialogFlowWebHook').value);
-        Reflect.defineMetadata(METHOD_METADATA, RequestMethod.POST, Object.getOwnPropertyDescriptor(DialogController.prototype, 'dialogFlowWebHook').value);
-        return DialogController;
+        Reflect.defineMetadata(PATH_METADATA, webHookConfig.basePath, DialogFlowController);
+        Reflect.defineMetadata(PATH_METADATA, webHookConfig.postPath, Object.getOwnPropertyDescriptor(DialogFlowController.prototype, 'dialogFlowWebHook').value);
+        Reflect.defineMetadata(METHOD_METADATA, RequestMethod.POST, Object.getOwnPropertyDescriptor(DialogFlowController.prototype, 'dialogFlowWebHook').value);
+        return DialogFlowController;
     }
 
     async dialogFlowWebHook(@Body() dialogFlowResponse: DialogFlowResponse, @Res() res) {
