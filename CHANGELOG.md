@@ -9,6 +9,18 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Fixes
 
+* Typo in the default config path in the module
+* Remove console.log in the controller
+
+### Added
+
+* Samples directory
+  * Add `01-dialogflow-handlers` that show how to use the library
+
+## [1.1.2] - 2018-05-08
+
+### Fixes
+
 * Action support with `@DialogFlowAction()`
 
 ## [1.1.1] - 2018-05-07
