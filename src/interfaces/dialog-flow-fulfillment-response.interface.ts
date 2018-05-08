@@ -6,8 +6,8 @@ export interface DialogFlowFulfillmentResponse {
             [param: string]: any;
         };
     };
-    fulfillmentMessages: Array<any>;
-    fulfillmentText: string;
+    fulfillmentMessages?: Array<any>;
+    fulfillmentText?: string;
     outputContexts?: {
         name: string;
         lifeSpan: number;

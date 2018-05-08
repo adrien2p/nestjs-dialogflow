@@ -11,7 +11,7 @@ export class DialogFlowModule implements NestModule{
     public static forRoute(webHookConfig?: WebHookConfig): DynamicModule {
         webHookConfig = {
             basePath: 'web-hooks',
-            postPath: 'dialog-glow',
+            postPath: 'dialog-flow',
             ...webHookConfig
         };
 
