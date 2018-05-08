@@ -1,6 +1,8 @@
 import { Component } from '@nestjs/common';
-import { DialogFlowFulfillmentResponse, DialogFlowIntent, DialogFlowResponse } from '../../../lib';
-import { DialogFlowAction } from '../../../lib/decorators/dialog-flow-action.decorator';
+import {
+    DialogFlowAction, DialogFlowFulfillmentResponse, DialogFlowIntent,
+    DialogFlowResponse
+} from 'nestjs-dialogflow';
 
 @Component()
 export class AppComponent {
