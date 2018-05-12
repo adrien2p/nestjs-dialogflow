@@ -14,7 +14,7 @@ export class AppComponent {
         return { fulfillmentText: 'events.debug action well received.', fulfillmentMessages: [] };
     }
 
-    @DialogFlowIntent('Events:get')
+    @DialogFlowIntent('Event:debug')
     public handleEventDebug2(dialogFlowResponse: DialogFlowResponse): DialogFlowFulfillmentResponse {
         console.log('intent handled');
         return { fulfillmentText: 'Events:debug intent well received.', fulfillmentMessages: [] };
