@@ -5,6 +5,23 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [1.1.5] - 2018-05-12
+
+### Added
+
+* Add `DialogFlowService` in order to handle the controller logic and dispatch intent
+* Add tests in order to have well test suite
+  * `Decorators/` tested
+  * `module/[provider, component, controller]` tested
+  
+### Update
+
+* `DialogFlowController` logic now delegated to the `DialogFlowService`
+
+### Fixes
+
+* `Handlers` provider stored handler method when no intent or action was found
+
 ## [1.1.4] - 2018-05-08
 
 ### Update
