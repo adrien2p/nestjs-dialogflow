@@ -30,7 +30,7 @@
     "format": "prettier src/**/*.ts --write",
     "build": "tsc -p tsconfig.json",
     "test": "jest --config=jest.json",
-    "test:cov": "jest --config=jest.json --coverage --coverageDirectory=coverage",
+    "test:cov": "jest --config=jest.json --coverage --coverageDirectory=coverage && cat ./coverage/lcov.info | coveralls",
     "prepublish:npm": "npm run build",
     "publish:npm": "npm publish --access public"
   },

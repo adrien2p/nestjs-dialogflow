@@ -7,7 +7,6 @@ script:
      - npm run test
 after_success:
       - npm run test:cov
-      - "npm install coveralls && cat ./coverage/lcov.info | coveralls"
 notifications:
   email:
     - adrien.deperetti.freelance@gmail.com
