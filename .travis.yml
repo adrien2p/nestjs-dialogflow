@@ -4,7 +4,10 @@ node_js:
 install:
      - npm install
 script:
-     - npm run test:cov && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage
+     - npm run test
+after_success:
+      - npm run test:cov
+      - "npm install coveralls && cat ./coverage/lcov.info | coveralls"
 notifications:
   email:
     - adrien.deperetti.freelance@gmail.com
