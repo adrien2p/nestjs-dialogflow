@@ -1,3 +1,8 @@
+[![Build Status](https://travis-ci.org/adrien2p/nestjs-dialogflow.svg?branch=master)](https://travis-ci.org/adrien2p/nestjs-dialogflow)
+[![Coverage Status](https://coveralls.io/repos/github/adrien2p/nestjs-dialogflow/badge.svg?branch=master)](https://coveralls.io/github/adrien2p/nestjs-dialogflow?branch=master)
+[![npm version](https://badge.fury.io/js/nestjs-dialogflow.svg)](https://badge.fury.io/js/nestjs-dialogflow)
+[![npm](https://img.shields.io/npm/dm/nestjs-dialogflow.svg)](https://badge.fury.io/js/nestjs-dialogflow)
+
 # DialogFlow module for NestJS :satellite:
 
 Dialog flow module that simplify the web hook handling for your NLP application using NestJS
