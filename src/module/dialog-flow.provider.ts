@@ -18,11 +18,10 @@ export const provider = {
                 const reflectedMetadata = metadataScanner.scanFromPrototype(null, component.prototype, method => {
                     const intentOrAction = Reflect.getMetadata(DIALOG_FLOW_INTENT, Reflect.getOwnPropertyDescriptor(component.prototype, method).value) ||
                         Reflect.getMetadata(DIALOG_FLOW_ACTION,  Reflect.getOwnPropertyDescriptor(component.prototype, method).value);
-                    return {
-                        handler: component.prototype[method],
-                        intentOrAction
-                    }
-                });
+
+                    return intentOrAction ? { handler: component.prototype[method], intentOrAction } : null;
+                }).filter(v => v);
+
                 [...reflectedMetadata].forEach(metadata => {
                     handlers.set(metadata.intentOrAction, metadata.handler);
                 });

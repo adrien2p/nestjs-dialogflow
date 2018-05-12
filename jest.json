@@ -9,6 +9,15 @@
     "^.+\\.tsx?$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
   },
   "testRegex": "/src/.*\\.(test|spec).(ts|tsx|js)$",
-  "collectCoverageFrom" : ["src/**/*.{js,jsx,tsx,ts}", "!**/node_modules/**", "!**/vendor/**"],
+  "collectCoverageFrom" : [
+    "src/**/*.{js,jsx,tsx,ts}",
+    "!**/node_modules/**",
+    "!**/vendor/**",
+    "!src/**/*.module.ts",
+    "!src/middlewares/**",
+    "!src/interfaces/**",
+    "!src/constant.ts",
+    "!src/index.ts"
+  ],
   "coverageReporters": ["json", "lcov"]
 }

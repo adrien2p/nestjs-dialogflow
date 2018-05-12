@@ -1,11 +1,12 @@
-import { Body, Controller, HttpStatus, Inject, RequestMethod, Res } from '@nestjs/common';
+import { Body, Controller, HttpStatus, RequestMethod, Res } from '@nestjs/common';
 import { DialogFlowResponse } from '../interfaces/dialog-flow-response.interface';
+import { DialogFlowService } from './dialog-flow.component';
 import { METHOD_METADATA, PATH_METADATA } from '../constant';
 import { WebHookConfig } from '../interfaces/web-hook-config.interface';
 
 @Controller()
 export class DialogFlowController {
-    constructor(@Inject('Handlers') private readonly handlers: Map<string, any>) { }
+    constructor(private readonly dialogFlowService: DialogFlowService) { }
 
     public static forRoute(webHookConfig: WebHookConfig) {
         Reflect.defineMetadata(PATH_METADATA, webHookConfig.basePath, DialogFlowController);
@@ -15,15 +16,7 @@ export class DialogFlowController {
     }
 
     async dialogFlowWebHook(@Body() dialogFlowResponse: DialogFlowResponse, @Res() res) {
-        const intent = dialogFlowResponse.queryResult.intent.displayName;
-        const action = dialogFlowResponse.queryResult.action;
-
-        const handler = this.handlers.get(intent) || this.handlers.get(action);
-        if (!handler) {
-            throw new Error(`Unknown handler for ${intent ? `intent ${intent}.` : (action ? `action ${action}.` : 'an undefined intent and/or action.')}`);
-        }
-
-        const fulfillment = await handler.call(this, dialogFlowResponse);
+        const fulfillment = await this.dialogFlowService.handleIntentOrAction(dialogFlowResponse);
         return res.status(HttpStatus.OK).send(fulfillment);
     }
 }
