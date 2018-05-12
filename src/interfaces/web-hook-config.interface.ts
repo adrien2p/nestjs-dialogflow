@@ -1,4 +1,4 @@
 export interface WebHookConfig {
-    basePath?: string;
-    postPath?: string;
+	basePath?: string;
+	postPath?: string;
 }

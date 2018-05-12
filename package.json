@@ -27,7 +27,7 @@
     "node": ">= 8.9.0"
   },
   "scripts": {
-    "format": "prettier lib/**/*.ts --write",
+    "format": "prettier src/**/*.ts --write",
     "build": "tsc -p tsconfig.json",
     "test": "jest --config=jest.json",
     "test:cov": "jest --config=jest.json --coverage --coverageDirectory=coverage",
