@@ -1,0 +1,10 @@
+language: node_js
+node_js:
+      - "8.9.0"
+install:
+     - npm install
+script:
+     - npm run test:coverage
+notifications:
+  email:
+    - adrien.deperetti@gmail.com
