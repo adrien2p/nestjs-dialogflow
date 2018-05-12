@@ -1,5 +1,4 @@
 import 'reflect-metadata';
-import { mockRes } from 'sinon-express-mock';
 import { Component, RequestMethod } from '@nestjs/common';
 import { DialogFlowController } from '../dialog-flow.controller';
 import { DialogFlowFulfillmentResponse } from '../../interfaces/dialog-flow-fulfillment-response.interface';
@@ -7,6 +6,7 @@ import { DialogFlowIntent } from '../../decorators/dialog-flow-intent.decorator'
 import { DialogFlowResponse } from '../../interfaces/dialog-flow-response.interface';
 import { DialogFlowService } from '../dialog-flow.component';
 import { METHOD_METADATA, PATH_METADATA } from '../../constant';
+import { mockRes } from 'sinon-express-mock';
 import { provider } from '../dialog-flow.provider';
 import { Test } from '@nestjs/testing';
 import { WebHookConfig } from '../../interfaces/web-hook-config.interface';
@@ -44,7 +44,7 @@ describe('dialog flow controller', () => {
         expect(methodPathMetadata).toEqual(webHookConfig.postPath);
     });
 
-    it('should called the appropriate handler and call res', async () => {
+    it('should call the appropriate handler and call res', async () => {
         const res = mockRes();
         const dialogFlowResponse = { queryResult: { intent: { displayName: 'intent' } } } as DialogFlowResponse;
 
