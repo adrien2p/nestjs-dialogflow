@@ -51,6 +51,8 @@
     "reflect-metadata": "^0.1.12",
     "rxjs": "^6.1.0",
     "rxjs-compat": "^6.1.0",
+    "sinon": "^5.0.7",
+    "sinon-express-mock": "^2.0.0",
     "supertest": "^3.0.0",
     "ts-jest": "^22.4.6",
     "typescript": "^2.8.3"
