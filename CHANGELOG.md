@@ -9,8 +9,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Added
 
-* Add `DialogFlowService` in order to handle the controller logic and dispatch intent
-* Add tests in order to have well test suite
+* `DialogFlowService` in order to handle the controller logic and dispatch intent
+* tests in order to have well test suite
   * `Decorators/` tested
   * `module/[provider, component, controller]` tested
   
