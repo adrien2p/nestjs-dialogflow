@@ -15,14 +15,14 @@ To start using this module you should run the following command
 
 ### How to use it
 
-To use the module, you have to import it into your `ApplicationModule` and call the `forRoute` in order
-to initialize the module. The `forRoute` method can take as parameters an object with a `basePath` and a `postPath`
+To use the module, you have to import it into your `ApplicationModule` and call the `forRoot` in order
+to initialize the module. The `forRoot` method can take as parameters an object with a `basePath` and a `postPath`
 in order to configure the controller used for the web hook.
 
 ```ts
 @Module({
     imports: [
-        DialogFlowModule.forRoute({
+        DialogFlowModule.forRoot({
             basePath: 'web-hooks',
             postPath: 'dialog-flow'
         })
