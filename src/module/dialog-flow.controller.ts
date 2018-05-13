@@ -8,7 +8,7 @@ import { WebHookConfig } from '../interfaces/web-hook-config.interface';
 export class DialogFlowController {
 	constructor(private readonly dialogFlowService: DialogFlowService) {}
 
-	public static forRoute(webHookConfig: WebHookConfig) {
+	public static forRoot(webHookConfig: WebHookConfig) {
 		Reflect.defineMetadata(PATH_METADATA, webHookConfig.basePath, DialogFlowController);
 		Reflect.defineMetadata(
 			PATH_METADATA,

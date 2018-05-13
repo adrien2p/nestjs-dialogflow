@@ -9,7 +9,7 @@ import { WebHookConfig } from '../interfaces/web-hook-config.interface';
 	components: [DialogFlowService, provider],
 })
 export class DialogFlowModule implements NestModule {
-	public static forRoute(webHookConfig?: WebHookConfig): DynamicModule {
+	public static forRoot(webHookConfig?: WebHookConfig): DynamicModule {
 		webHookConfig = {
 			basePath: 'web-hooks',
 			postPath: 'dialog-flow',
@@ -18,7 +18,7 @@ export class DialogFlowModule implements NestModule {
 
 		return {
 			module: DialogFlowModule,
-			controllers: [DialogFlowController.forRoute(webHookConfig)],
+			controllers: [DialogFlowController.forRoot(webHookConfig)],
 		};
 	}
 

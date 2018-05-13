@@ -25,7 +25,7 @@ describe('dialog flow controller', () => {
 
     beforeAll(async () => {
         const module = await Test.createTestingModule({
-            controllers: [DialogFlowController.forRoute(webHookConfig)],
+            controllers: [DialogFlowController.forRoot(webHookConfig)],
             components: [FakeService, DialogFlowService, provider]
         }).compile();
 
@@ -33,7 +33,7 @@ describe('dialog flow controller', () => {
     });
 
     it('should be able to return the controller with new reflected metadata', () => {
-        const _controller = DialogFlowController.forRoute(webHookConfig);
+        const _controller = DialogFlowController.forRoot(webHookConfig);
 
         const pathMetadata = Reflect.getMetadata(PATH_METADATA, _controller);
         const methodMetadata = Reflect.getMetadata(METHOD_METADATA, Reflect.getOwnPropertyDescriptor(_controller.prototype, 'dialogFlowWebHook').value);

@@ -3,7 +3,7 @@ import { DialogFlowModule } from 'nestjs-dialogflow';
 import { Module } from '@nestjs/common';
 
 @Module({
-  imports: [DialogFlowModule.forRoute()],
+  imports: [DialogFlowModule.forRoot()],
   controllers: [],
   components: [AppComponent],
 })
