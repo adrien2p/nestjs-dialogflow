@@ -1,2 +1,2 @@
 import 'reflect-metadata';
-export declare const DialogFlowAction: (action: string) => (target: object, key?: any, descriptor?: any) => any;
+export declare const DialogFlowAction: (action: string) => (target: Object, key: string | symbol, descriptor: PropertyDescriptor) => PropertyDescriptor;

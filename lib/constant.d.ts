@@ -1,5 +1,6 @@
-export declare const DIALOG_FLOW_ACTION = "__action__";
-export declare const DIALOG_FLOW_INTENT = "__intent__";
+export declare const DIALOG_FLOW_ACTION = "__dfAction__";
+export declare const DIALOG_FLOW_INTENT = "__dfIntent__";
+export declare const DIALOG_FLOW_PARAMS = "__dfParams__";
 export declare const nestMetadata: {
     COMPONENTS: string;
 };

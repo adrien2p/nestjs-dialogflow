@@ -18,11 +18,11 @@ To start using this module you should run the following command
 There are 3 decorators provided by the module that allow you to handle intent/action or pick properties from the response.
 
 
-| Name | Usage | behavior |
-|:----:|:-----:|:--------:|
-|`@DialogFlowIntent(/*...*/)`| `@DialogFlowIntent('myIntent') public method(param: DialogFlowResponse) ... `| Handle the specified intent into the decorated method |
-|`@DialogFlowAction(/*...*/)`| `@DialogFlowAction('myAction') public method(param: DialogFlowResponse) ... `| Handle the specified action into the decorated method |
-|`@DialogFlowParam(/*...*/)`| `@DialogFlowIntent('myIntent') public method(@DialogFlowParam('queryResult') param: QueryResult) ... `| Get the value of the property specified through the parameter decorator |
+| Name | behavior |
+|:-----|:--------:|
+|`@DialogFlowIntent('myIntent')`  <br>  `public method(param: DialogFlowResponse)`| Handle the specified intent into the decorated method |
+|`@DialogFlowAction('myAction')` <br> `public method(param: DialogFlowResponse)`| Handle the specified action into the decorated method |
+|`@DialogFlowIntent('myIntent')`  <br>  `public method(@DialogFlowParam('queryResult') param: QueryResult)`| Get the value of the property specified through the parameter decorator |
 
 
 ### Set up
