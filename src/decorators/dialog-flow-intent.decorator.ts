@@ -1,5 +1,19 @@
 import 'reflect-metadata';
-import { DIALOG_FLOW_INTENT } from '../constant';
-import { ReflectMetadata } from '@nestjs/common';
+import { applyParamsMetadataDecorator } from '../utils';
+import { DIALOG_FLOW_INTENT, DIALOG_FLOW_PARAMS } from '../constant';
 
-export const DialogFlowIntent = (intent: string) => ReflectMetadata(DIALOG_FLOW_INTENT, intent);
+export const DialogFlowIntent = (intent: string) => {
+	return (target: Object, key: string | symbol, descriptor: PropertyDescriptor) => {
+		const originalMethod = descriptor.value;
+		descriptor.value = (...args: any[]) => {
+			const paramsMetadata = (Reflect.getMetadata(DIALOG_FLOW_PARAMS, target) || []).filter(p => {
+				return p.key === key;
+			});
+			return originalMethod.apply(this, applyParamsMetadataDecorator(paramsMetadata, args));
+		};
+
+		/* Apply the intent value on the descriptor to be handled. */
+		Reflect.defineMetadata(DIALOG_FLOW_INTENT, intent, descriptor.value);
+		return descriptor;
+	};
+};

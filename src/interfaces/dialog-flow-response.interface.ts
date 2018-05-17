@@ -14,11 +14,13 @@ export interface QueryResult {
 	intent: { name: string; displayName: string };
 	intentDetectionConfidence: Number;
 	languageCode: string;
-	outputContexts: {
-		name: string;
-		lifespanCount: number;
-		parameters: { param: string; value: any };
-	};
+	outputContexts: OutputContexts;
 	parameters: { param: string; value: any };
 	queryText: string;
+}
+
+export interface OutputContexts {
+	name: string;
+	lifespanCount: number;
+	parameters: { param: string; value: any };
 }

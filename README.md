@@ -13,7 +13,19 @@ To start using this module you should run the following command
 
 `npm i nestjs-dialogflow @nestjs/common @nestjs/core reflect-metadata`
 
-### How to use it
+### Decorators
+
+There is 3 decorators feature provided by the module
+
+
+| Name | Usage | behavior |
+|:----:|:-----:|:--------:|
+|`@DialogFlowIntent(/*...*/)`| `@DialogFlowIntent('myIntent') public method(param: DialogFlowResponse) ... `| Handle the specified intent into the decorated method |
+|`@DialogFlowAction(/*...*/)`| `@DialogFlowAction('myAction') public method(param: DialogFlowResponse) ... `| Handle the specified action into the decorated method |
+|`@DialogFlowParam(/*...*/)`| `@DialogFlowIntent('myIntent') public method(@DialogFlowParam('queryResult') param: QueryResult) ... `| Get the value of the property specified through the parameter decorator |
+
+
+### Set up
 
 To use the module, you have to import it into your `ApplicationModule` and call the `forRoot` in order
 to initialize the module. The `forRoot` method can take as parameters an object with a `basePath` and a `postPath`
@@ -49,6 +61,29 @@ export class MyDialogFlowComponent {
 
     @DialogFlowIntent('My:intent2')
     public async handleMyIntent2(dialogFlowResponse: DialogFlowResponse): Promise<DialogFlowFulfillmentResponse> {
+        /* Your code here */
+        return {} as DialogFlowFulfillmentResponse;
+    }
+    
+}
+```
+
+You also have the possibility to pick any properties that you need directly from the `dialogFlowResponse`, to get them from 
+the handler parameters. To do that, you can use the `@DialogFlowParam` decorator and pass as parameter a string path to
+the property that you want to pick.
+
+```ts
+@Component()
+export class MyDialogFlowComponent {
+    
+    @DialogFlowIntent('My:intent1')
+    public async handleMyIntent1(@DialogFlowParam('queryResult.outputContexts') outputContexts: OutputContexts): Promise<DialogFlowFulfillmentResponse> {
+        /* Your code here */
+        return {} as DialogFlowFulfillmentResponse;
+    }
+
+    @DialogFlowIntent('My:intent2')
+    public async handleMyIntent2(@DialogFlowParam('queryResult') queryResult: QueryResult): Promise<DialogFlowFulfillmentResponse> {
         /* Your code here */
         return {} as DialogFlowFulfillmentResponse;
     }

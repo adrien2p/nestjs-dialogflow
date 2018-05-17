@@ -5,6 +5,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [1.2.0] - 2018-05-17
+
+### Add
+
+* `@DialogFlowParam()` decorator in order to pick properties from `DialogFlowResponse` param and apply as new method parameters
+* `Utils` internal usage
+* `DIALOG_FLOW_PARAMS` constant for the new metadata key of `@DialogFlowParam()` decorator
+
+### Update
+
+* Improve and add tests, better coverage
+* Constants has been updated to avoid any collision
+* `OutputContexts` and `QueryResult` interfaces are now exposed
+
 ## [1.1.9] - 2018-05-12
 
 ### Update
@@ -19,7 +33,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [1.1.5] - 2018-05-12
 
-### Added
+### Add
 
 * `DialogFlowService` in order to handle the controller logic and dispatch intent
 * tests in order to have well test suite
@@ -47,7 +61,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 * Typo in the default config path in the module
 * Remove console.log in the controller
 
-### Added
+### Add
 
 * Samples directory
   * Add `01-dialogflow-handlers` that show how to use the library
@@ -70,7 +84,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 * `DialogFlowModule` now apply the `DialogFlowAuthorizationMiddleware` middleware to validate the token sent by `DialogFlow`
 
-### Added
+### Add
 
 * `DialogFlowAuthorizationMiddleware` the middleware compare the token sent by `DialogFlow` to the token set in the env variable
 `DIALOG_FLOW_AUTHORIZATION_TOKEN`
@@ -83,7 +97,7 @@ Change project name.
 
 ## [1.0.0] - 2018-05-07
 
-### Added
+### Add
 
 * Decorators to handle the intent/action sent from `DialogFlow`
   * `@DialogFlowIntent()` decorator to define the concerned intent instead of the action
