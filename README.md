@@ -15,7 +15,7 @@ To start using this module you should run the following command
 
 ### Features
 
-There are 3 decorators provided by the module that allowed you to handle intent/action or pick properties from the response.
+There are 3 decorators provided by the module that allow you to handle intent/action or pick properties from the response.
 
 
 | Name | Usage | behavior |
