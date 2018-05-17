@@ -13,9 +13,9 @@ To start using this module you should run the following command
 
 `npm i nestjs-dialogflow @nestjs/common @nestjs/core reflect-metadata`
 
-### Decorators
+### Features
 
-There is 3 decorators feature provided by the module
+There are 3 decorators provided by the module that allowed you to handle intent/action or pick properties from the response.
 
 
 | Name | Usage | behavior |
@@ -46,8 +46,8 @@ export class ApplicationModule { }
 After that, you have to go to your dialogFlow account to set up the url that should be reach to provide the result of
 your NLP request into the `Fulfillment` section of your agent. The url with the default config should looks like `https://myurl.me/web-hooks/dialog-flow`
 
-To handle the triggered intent, you can create your own component that will implement all the methods that should handle
-an `intent` or an `action`. This component can be a part one of your module.
+To handle an intent, you have to create your own component that will implement all the methods needed in order to handle 
+the concerned intents/action.
 
 ```ts
 @Component()
