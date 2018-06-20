@@ -1,7 +1,7 @@
 import { DialogFlowAuthorizationMiddleware } from '../middlewares/dialog-flow-authorization.middleware';
 import { DialogFlowController } from './dialog-flow.controller';
 import { DialogFlowService } from './dialog-flow.component';
-import { DynamicModule, MiddlewaresConsumer, Module, NestModule } from '@nestjs/common';
+import { DynamicModule, MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { provider } from './dialog-flow.provider';
 import { WebHookConfig } from '../interfaces/web-hook-config.interface';
 
@@ -22,7 +22,7 @@ export class DialogFlowModule implements NestModule {
 		};
 	}
 
-	public configure(consumer: MiddlewaresConsumer) {
+	public configure(consumer: MiddlewareConsumer) {
 		return consumer.apply([DialogFlowAuthorizationMiddleware]).forRoutes(DialogFlowController);
 	}
 }
