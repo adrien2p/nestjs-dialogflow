@@ -5,6 +5,6 @@ import { Module } from '@nestjs/common';
 @Module({
   imports: [DialogFlowModule.forRoot()],
   controllers: [],
-  components: [AppComponent],
+  providers: [AppComponent],
 })
 export class AppModule {}

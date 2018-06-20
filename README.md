@@ -2,6 +2,7 @@
 [![Coverage Status](https://coveralls.io/repos/github/adrien2p/nestjs-dialogflow/badge.svg?branch=master)](https://coveralls.io/github/adrien2p/nestjs-dialogflow?branch=master)
 [![npm version](https://badge.fury.io/js/nestjs-dialogflow.svg)](https://badge.fury.io/js/nestjs-dialogflow)
 [![npm](https://img.shields.io/npm/dm/nestjs-dialogflow.svg)](https://badge.fury.io/js/nestjs-dialogflow)
+[![Known Vulnerabilities](https://snyk.io/test/github/adrien2p/nestjs-dialogflow:package.json/badge.svg?targetFile=package.json)](https://snyk.io/test/github/adrien2p/nestjs-dialogflow:package.json?targetFile=package.json)
 
 # DialogFlow module for NestJS :satellite:
 
@@ -46,11 +47,11 @@ export class ApplicationModule { }
 After that, you have to go to your dialogFlow account to set up the url that should be reach to provide the result of
 your NLP request into the `Fulfillment` section of your agent. The url with the default config should looks like `https://myurl.me/web-hooks/dialog-flow`
 
-To handle an intent, you have to create your own component that will implement all the methods needed in order to handle 
+To handle an intent, you have to create your own Injectable that will implement all the methods needed in order to handle 
 the concerned intents/action.
 
 ```ts
-@Component()
+@Injectable()
 export class MyDialogFlowComponent {
     
     @DialogFlowIntent('My:intent1')
@@ -73,7 +74,7 @@ the handler parameters. To do that, you can use the `@DialogFlowParam` decorator
 the property that you want to pick.
 
 ```ts
-@Component()
+@Injectable()
 export class MyDialogFlowComponent {
     
     @DialogFlowIntent('My:intent1')

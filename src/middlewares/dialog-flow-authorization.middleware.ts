@@ -1,6 +1,6 @@
-import { Middleware, NestMiddleware } from '@nestjs/common';
+import { Injectable, NestMiddleware } from '@nestjs/common';
 
-@Middleware()
+@Injectable()
 export class DialogFlowAuthorizationMiddleware implements NestMiddleware {
 	resolve() {
 		return function(req, res, next) {

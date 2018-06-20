@@ -1,4 +1,4 @@
-import { Component } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { DialogFlowFulfillmentResponse } from '../../interfaces/dialog-flow-fulfillment-response.interface';
 import { DialogFlowIntent } from '../../decorators/dialog-flow-intent.decorator';
 import { DialogFlowResponse } from '../../interfaces/dialog-flow-response.interface';
@@ -9,7 +9,7 @@ import { Test } from '@nestjs/testing';
 describe('dialog flow service', () => {
     let dialogFlowService: DialogFlowService;
 
-    @Component()
+    @Injectable()
     class FakeService {
         @DialogFlowIntent('intent')
         public handlerIntent() {
@@ -19,7 +19,7 @@ describe('dialog flow service', () => {
 
     beforeAll(async () => {
         const module = await Test.createTestingModule({
-            components: [FakeService, DialogFlowService, provider]
+            providers: [FakeService, DialogFlowService, provider]
         }).compile();
 
         dialogFlowService = module.get<DialogFlowService>(DialogFlowService);

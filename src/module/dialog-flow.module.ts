@@ -6,7 +6,7 @@ import { provider } from './dialog-flow.provider';
 import { WebHookConfig } from '../interfaces/web-hook-config.interface';
 
 @Module({
-	components: [DialogFlowService, provider],
+	providers: [DialogFlowService, provider],
 })
 export class DialogFlowModule implements NestModule {
 	public static forRoot(webHookConfig?: WebHookConfig): DynamicModule {

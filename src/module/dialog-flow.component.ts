@@ -1,8 +1,8 @@
-import { Component, Inject } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { DialogFlowFulfillmentResponse } from '../interfaces/dialog-flow-fulfillment-response.interface';
 import { DialogFlowResponse } from '../interfaces/dialog-flow-response.interface';
 
-@Component()
+@Injectable()
 export class DialogFlowService {
 	constructor(@Inject('Handlers') private readonly handlers: Map<string, any>) {}
 

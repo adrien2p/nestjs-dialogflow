@@ -1,4 +1,4 @@
-import { Component } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { DialogFlowIntent } from '../../decorators/dialog-flow-intent.decorator';
 import { expect } from 'chai';
 import { provider } from '../dialog-flow.provider';
@@ -7,7 +7,7 @@ import { Test } from '@nestjs/testing';
 describe('dialog flow provider', () => {
     let handlers: Map<string, any>;
 
-    @Component()
+    @Injectable()
     class Service {
         @DialogFlowIntent('firstIntent')
         public handler() {}
@@ -18,7 +18,7 @@ describe('dialog flow provider', () => {
 
     beforeAll(async () => {
         const module = await Test.createTestingModule({
-            components: [Service, provider]
+            providers: [Service, provider]
         }).compile();
 
         handlers = module.get<Map<string, any>>(provider.provide);

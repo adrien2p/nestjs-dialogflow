@@ -1,5 +1,5 @@
 import 'reflect-metadata';
-import { Component, RequestMethod } from '@nestjs/common';
+import { Injectable, RequestMethod } from '@nestjs/common';
 import { DialogFlowController } from '../dialog-flow.controller';
 import { DialogFlowFulfillmentResponse } from '../../interfaces/dialog-flow-fulfillment-response.interface';
 import { DialogFlowIntent } from '../../decorators/dialog-flow-intent.decorator';
@@ -15,7 +15,7 @@ describe('dialog flow controller', () => {
     const webHookConfig: WebHookConfig = { basePath: 'basePath', postPath: 'postPath' };
     let controller: DialogFlowController;
 
-    @Component()
+    @Injectable()
     class FakeService {
         @DialogFlowIntent('intent')
         public handlerIntent() {
@@ -26,7 +26,7 @@ describe('dialog flow controller', () => {
     beforeAll(async () => {
         const module = await Test.createTestingModule({
             controllers: [DialogFlowController.forRoot(webHookConfig)],
-            components: [FakeService, DialogFlowService, provider]
+            providers: [FakeService, DialogFlowService, provider]
         }).compile();
 
         controller = module.get<DialogFlowController>(DialogFlowController);
