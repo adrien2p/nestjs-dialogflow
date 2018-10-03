@@ -8,15 +8,15 @@ import {
 	NestModule,
 	OnModuleInit,
 } from '@nestjs/common';
-import { ModuleRef } from '@nestjs/core';
 import { WebHookConfig } from '../interfaces/web-hook-config.interface';
 import { ModulesContainer } from '@nestjs/core/injector';
-import { MetadataScanner } from '@nestjs/core/metadata-scanner';
-import { DIALOG_FLOW_ACTION, DIALOG_FLOW_INTENT, nestMetadata } from '../constant';
+import { ModuleRef } from '@nestjs/core';
 import 'reflect-metadata';
+import { Scanner, HandlerContainer } from './../core';
 
 @Module({
-	providers: [DialogFlowService],
+	providers: [DialogFlowService, HandlerContainer],
+	controllers: [DialogFlowController],
 })
 export class DialogFlowModule implements NestModule, OnModuleInit {
 	public static forRoot(webHookConfig?: WebHookConfig): DynamicModule {
@@ -28,54 +28,23 @@ export class DialogFlowModule implements NestModule, OnModuleInit {
 
 		return {
 			module: DialogFlowModule,
+			providers: [DialogFlowService, HandlerContainer],
 			controllers: [DialogFlowController.forRoot(webHookConfig)],
 		};
 	}
 
 	constructor(
-		private readonly moduleRef: ModuleRef,
 		private readonly modulesContainer: ModulesContainer,
-		private readonly dialogFlowService: DialogFlowService,
+		private readonly moduleRef: ModuleRef,
+		private readonly handlerContainer: HandlerContainer,
 	) {}
 
 	public onModuleInit(): any {
-		//TODO loop through modules container and find DIALOG_FLOW_HANDLER in reflect for handlers
-		const metadataScanner = new MetadataScanner();
-		const modules = [...this.modulesContainer.values()];
-
-		modules.forEach(({ metatype }) => {
-			const metadata = Reflect.getMetadata(nestMetadata.COMPONENTS, metatype) || [];
-			const components = [...metadata.filter(metatype => typeof metatype === 'function')];
-
-			components.map(component => {
-				const reflectedMetadata = metadataScanner
-					.scanFromPrototype(null, component.prototype, method => {
-						const intentOrAction =
-							Reflect.getMetadata(
-								DIALOG_FLOW_INTENT,
-								Reflect.getOwnPropertyDescriptor(component.prototype, method).value,
-							) ||
-							Reflect.getMetadata(
-								DIALOG_FLOW_ACTION,
-								Reflect.getOwnPropertyDescriptor(component.prototype, method).value,
-							);
-
-						return intentOrAction ? { handler: component, intentOrAction, method } : null;
-					})
-					.filter(v => v);
-
-				[...reflectedMetadata].forEach(metadata => {
-					this.dialogFlowService.addMethod(
-						metadata.intentOrAction,
-						this.moduleRef.get(metadata.handler),
-						metadata.method,
-					);
-				});
-			});
-		});
+		const scanner = new Scanner(this.moduleRef, this.modulesContainer, this.handlerContainer);
+		scanner.scanAndRegisterHandlers();
 	}
 
 	public configure(consumer: MiddlewareConsumer) {
-		return consumer.apply([DialogFlowAuthorizationMiddleware]).forRoutes(DialogFlowController);
+		return consumer.apply(DialogFlowAuthorizationMiddleware).forRoutes(DialogFlowController);
 	}
 }

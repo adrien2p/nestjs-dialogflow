@@ -4,16 +4,16 @@ import { DialogFlowController } from '../dialog-flow.controller';
 import { DialogFlowFulfillmentResponse } from '../../interfaces/dialog-flow-fulfillment-response.interface';
 import { DialogFlowIntent } from '../../decorators/dialog-flow-intent.decorator';
 import { DialogFlowResponse } from '../../interfaces/dialog-flow-response.interface';
-import { DialogFlowService } from '../dialog-flow.component';
 import { METHOD_METADATA, PATH_METADATA } from '../../constant';
 import { mockRes } from 'sinon-express-mock';
-import { provider } from '../dialog-flow.provider';
 import { Test } from '@nestjs/testing';
 import { WebHookConfig } from '../../interfaces/web-hook-config.interface';
+import { DialogFlowModule } from '../dialog-flow.module';
 
 describe('dialog flow controller', () => {
     const webHookConfig: WebHookConfig = { basePath: 'basePath', postPath: 'postPath' };
     let controller: DialogFlowController;
+    let app;
 
     @Injectable()
     class FakeService {
@@ -25,9 +25,12 @@ describe('dialog flow controller', () => {
 
     beforeAll(async () => {
         const module = await Test.createTestingModule({
-            controllers: [DialogFlowController.forRoot(webHookConfig)],
-            providers: [FakeService, DialogFlowService, provider]
+            imports: [DialogFlowModule.forRoot()],
+            providers: [FakeService],
         }).compile();
+
+        app = module.createNestApplication();
+        await app.init();
 
         controller = module.get<DialogFlowController>(DialogFlowController);
     });
@@ -52,5 +55,9 @@ describe('dialog flow controller', () => {
         expect(res.status.called).toBe(true);
         expect(res.send.called).toBe(true);
         expect(res.send.calledWith({ fulfillmentText: 'fulfilled' })).toBe(true);
+    });
+
+    afterAll(async () => {
+        await app.close();
     });
 });
