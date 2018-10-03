@@ -4,9 +4,7 @@ import { DialogFlowResponse } from '../interfaces/dialog-flow-response.interface
 
 @Injectable()
 export class DialogFlowService {
-	private readonly handlers: Map<string, { provider: Provider, methodName: string }>;
-
-	constructor() {}
+	private readonly handlers: Map<string, { provider: Provider, methodName: string }> = new Map<string, { provider: Provider, methodName: string }>();
 
 	public async handleIntentOrAction(
 		dialogFlowResponse: DialogFlowResponse,
