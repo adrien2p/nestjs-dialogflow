@@ -14,7 +14,7 @@ export class DialogFlowService {
 
 		const matchedHandlers = [this.handlers.get(intent), this.handlers.get(action)].filter(v => v);
 
-		if (!matchedHandlers) {
+		if (matchedHandlers.length === 0) {
 			throw new Error(
 				`Unknown handler for ${
 					intent
