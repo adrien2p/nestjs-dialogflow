@@ -7,7 +7,6 @@ import { DialogFlowResponse } from '../../interfaces/dialog-flow-response.interf
 import { DialogFlowService } from '../dialog-flow.component';
 import { METHOD_METADATA, PATH_METADATA } from '../../constant';
 import { mockRes } from 'sinon-express-mock';
-import { provider } from '../dialog-flow.provider';
 import { Test } from '@nestjs/testing';
 import { WebHookConfig } from '../../interfaces/web-hook-config.interface';
 
@@ -26,7 +25,7 @@ describe('dialog flow controller', () => {
     beforeAll(async () => {
         const module = await Test.createTestingModule({
             controllers: [DialogFlowController.forRoot(webHookConfig)],
-            providers: [FakeService, DialogFlowService, provider]
+            providers: [FakeService, DialogFlowService]
         }).compile();
 
         controller = module.get<DialogFlowController>(DialogFlowController);

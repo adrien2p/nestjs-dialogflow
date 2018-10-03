@@ -3,7 +3,6 @@ import { DialogFlowFulfillmentResponse } from '../../interfaces/dialog-flow-fulf
 import { DialogFlowIntent } from '../../decorators/dialog-flow-intent.decorator';
 import { DialogFlowResponse } from '../../interfaces/dialog-flow-response.interface';
 import { DialogFlowService } from '../dialog-flow.component';
-import { provider } from '../dialog-flow.provider';
 import { Test } from '@nestjs/testing';
 
 describe('dialog flow service', () => {
@@ -19,7 +18,7 @@ describe('dialog flow service', () => {
 
     beforeAll(async () => {
         const module = await Test.createTestingModule({
-            providers: [FakeService, DialogFlowService, provider]
+            providers: [FakeService, DialogFlowService]
         }).compile();
 
         dialogFlowService = module.get<DialogFlowService>(DialogFlowService);
