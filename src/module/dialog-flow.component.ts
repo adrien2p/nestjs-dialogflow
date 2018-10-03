@@ -28,9 +28,11 @@ export class DialogFlowService {
 			);
 		}
 
-		const {provider, methodName} = matchedHandlers.pop();
+		if (matchedHandlers.length > 1) {
+			throw new Error(`Unable to process multiple handlers [${matchedHandlers.map((handler, key) => key).join(', ')}]`);
+		}
 
-		//TODO throw exception on multiple handlers 
+		const {provider, methodName} = matchedHandlers.pop();
 
 		const fulfillment = await provider[methodName](dialogFlowResponse);
 		return fulfillment as DialogFlowFulfillmentResponse;
