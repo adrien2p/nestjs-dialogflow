@@ -60,14 +60,14 @@ export class DialogFlowModule implements NestModule, OnModuleInit {
 								Reflect.getOwnPropertyDescriptor(component.prototype, method).value,
 							);
 
-						return intentOrAction ? { handler: component, intentOrAction, method } : null;
+						return intentOrAction ? { provider: component, intentOrAction, method } : null;
 					})
 					.filter(v => v);
 
 				[...reflectedMetadata].forEach(metadata => {
-					this.dialogFlowService.addMethod(
+					this.dialogFlowService.addHandler(
 						metadata.intentOrAction,
-						this.moduleRef.get(metadata.handler),
+						this.moduleRef.get(metadata.provider),
 						metadata.method,
 					);
 				});

@@ -2,19 +2,9 @@ import { Injectable, Provider } from '@nestjs/common';
 import { DialogFlowFulfillmentResponse } from '../interfaces/dialog-flow-fulfillment-response.interface';
 import { DialogFlowResponse } from '../interfaces/dialog-flow-response.interface';
 
-interface MethodProvider {
-	provider: string;
-	method: string;
-}
-
-interface MethodsTree {
-	[name: string]: MethodProvider[];
-}
-
 @Injectable()
 export class DialogFlowService {
-	private readonly providers: { [s: string]: Provider }[];
-	private readonly methods: MethodsTree;
+	private readonly handlers: Map<string, { provider: Provider, methodName: string }>;
 
 	constructor() {}
 
@@ -24,17 +14,9 @@ export class DialogFlowService {
 		const intent = dialogFlowResponse.queryResult.intent.displayName;
 		const action = dialogFlowResponse.queryResult.action;
 
-		const handlers = [];
+		const matchedHandlers = [this.handlers.get(intent), this.handlers.get(action)].filter(v => v);
 
-		if (this.methods.hasOwnProperty(intent)) {
-			handlers.push(this.methods[intent]);
-		}
-
-		if (this.methods.hasOwnProperty(action)) {
-			handlers.push(this.methods[action]);
-		}
-
-		if (!handlers) {
+		if (!matchedHandlers) {
 			throw new Error(
 				`Unknown handler for ${
 					intent
@@ -46,23 +28,15 @@ export class DialogFlowService {
 			);
 		}
 
-		//TODO verify if I need to call multiple handlers or just one singular handler
-		const fulfillment = await handler.call(this, dialogFlowResponse);
+		const {provider, methodName} = matchedHandlers.pop();
+
+		//TODO throw exception on multiple handlers 
+
+		const fulfillment = await provider[methodName](dialogFlowResponse);
 		return fulfillment as DialogFlowFulfillmentResponse;
 	}
 
-	protected addProvider(provider: Provider) {
-		this.providers[provider.constructor.name] = provider;
-	}
-
-	public addMethod(name: string, provider: Provider, method: string) {
-		this.addProvider(provider);
-		this.methods[name] = [
-			...this.methods[name],
-			{
-				provider: provider.constructor.name,
-				method,
-			},
-		];
+	public addHandler(handlerName: string, provider: Provider, methodName: string) {
+		this.handlers.set(handlerName, {provider, methodName});
 	}
 }
