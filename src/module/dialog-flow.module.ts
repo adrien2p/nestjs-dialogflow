@@ -8,7 +8,6 @@ import {
 	NestModule,
 	OnModuleInit,
 } from '@nestjs/common';
-import { ModuleRef } from '@nestjs/core';
 import { WebHookConfig } from '../interfaces/web-hook-config.interface';
 import { ModulesContainer } from '@nestjs/core/injector';
 import { MetadataScanner } from '@nestjs/core/metadata-scanner';
@@ -28,18 +27,17 @@ export class DialogFlowModule implements NestModule, OnModuleInit {
 
 		return {
 			module: DialogFlowModule,
+			providers: [DialogFlowService],
 			controllers: [DialogFlowController.forRoot(webHookConfig)],
 		};
 	}
 
 	constructor(
-		private readonly moduleRef: ModuleRef,
 		private readonly modulesContainer: ModulesContainer,
 		private readonly dialogFlowService: DialogFlowService,
 	) {}
 
 	public onModuleInit(): any {
-		//TODO loop through modules container and find DIALOG_FLOW_HANDLER in reflect for handlers
 		const metadataScanner = new MetadataScanner();
 		const modules = [...this.modulesContainer.values()];
 
@@ -59,7 +57,6 @@ export class DialogFlowModule implements NestModule, OnModuleInit {
 								DIALOG_FLOW_ACTION,
 								Reflect.getOwnPropertyDescriptor(component.prototype, method).value,
 							);
-
 						return intentOrAction ? { provider: component, intentOrAction, method } : null;
 					})
 					.filter(v => v);
@@ -67,7 +64,7 @@ export class DialogFlowModule implements NestModule, OnModuleInit {
 				[...reflectedMetadata].forEach(metadata => {
 					this.dialogFlowService.addHandler(
 						metadata.intentOrAction,
-						this.moduleRef.get(metadata.provider),
+						metadata.provider,
 						metadata.method,
 					);
 				});

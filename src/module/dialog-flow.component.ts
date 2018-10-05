@@ -1,10 +1,13 @@
-import { Injectable, Provider } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { DialogFlowFulfillmentResponse } from '../interfaces/dialog-flow-fulfillment-response.interface';
 import { DialogFlowResponse } from '../interfaces/dialog-flow-response.interface';
 
 @Injectable()
 export class DialogFlowService {
-	private readonly handlers: Map<string, { provider: Provider, methodName: string }> = new Map<string, { provider: Provider, methodName: string }>();
+	private readonly handlers: Map<string, { provider: any; methodName: string }> = new Map<
+		string,
+		{ provider: any; methodName: string }
+	>();
 
 	public async handleIntentOrAction(
 		dialogFlowResponse: DialogFlowResponse,
@@ -27,16 +30,20 @@ export class DialogFlowService {
 		}
 
 		if (matchedHandlers.length > 1) {
-			throw new Error(`Unable to process multiple handlers [${matchedHandlers.map((handler, key) => key).join(', ')}]`);
+			throw new Error(
+				`Unable to process multiple handlers [${matchedHandlers
+					.map((handler, key) => key)
+					.join(', ')}]`,
+			);
 		}
 
-		const {provider, methodName} = matchedHandlers.pop();
+		const { provider, methodName } = matchedHandlers.pop();
 
-		const fulfillment = await provider[methodName](dialogFlowResponse);
+		const fulfillment = await provider.prototype[methodName](dialogFlowResponse);
 		return fulfillment as DialogFlowFulfillmentResponse;
 	}
 
-	public addHandler(handlerName: string, provider: Provider, methodName: string) {
-		this.handlers.set(handlerName, {provider, methodName});
+	public addHandler(handlerName: string, provider: any, methodName: string) {
+		this.handlers.set(handlerName, { provider, methodName });
 	}
 }

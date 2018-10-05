@@ -3,10 +3,12 @@ import { DialogFlowFulfillmentResponse } from '../../interfaces/dialog-flow-fulf
 import { DialogFlowIntent } from '../../decorators/dialog-flow-intent.decorator';
 import { DialogFlowResponse } from '../../interfaces/dialog-flow-response.interface';
 import { DialogFlowService } from '../dialog-flow.component';
+import {DialogFlowModule} from '../dialog-flow.module';
 import { Test } from '@nestjs/testing';
 
 describe('dialog flow service', () => {
     let dialogFlowService: DialogFlowService;
+    let app;
 
     @Injectable()
     class FakeService {
@@ -18,8 +20,13 @@ describe('dialog flow service', () => {
 
     beforeAll(async () => {
         const module = await Test.createTestingModule({
-            providers: [FakeService, DialogFlowService]
+            imports: [DialogFlowModule.forRoot()],
+            providers: [FakeService],
         }).compile();
+
+        app = module.createNestApplication();
+
+        await app.init();
 
         dialogFlowService = module.get<DialogFlowService>(DialogFlowService);
     });
@@ -42,5 +49,9 @@ describe('dialog flow service', () => {
 
         expect(error).not.toEqual(null);
         expect(error.message).toEqual('Unknown handler for intent: intent2.');
+    });
+
+    afterAll(async () => {
+        await app.close();
     });
 });
