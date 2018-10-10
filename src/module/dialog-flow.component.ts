@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Provider } from '@nestjs/common';
 import { DialogFlowFulfillmentResponse } from '../interfaces/dialog-flow-fulfillment-response.interface';
 import { DialogFlowResponse } from '../interfaces/dialog-flow-response.interface';
 
@@ -39,11 +39,11 @@ export class DialogFlowService {
 
 		const { provider, methodName } = matchedHandlers.pop();
 
-		const fulfillment = await provider.prototype[methodName](dialogFlowResponse);
+		const fulfillment = await provider[methodName](dialogFlowResponse);
 		return fulfillment as DialogFlowFulfillmentResponse;
 	}
 
-	public addHandler(handlerName: string, provider: any, methodName: string) {
+	public addHandler(handlerName: string, provider: Provider, methodName: string) {
 		this.handlers.set(handlerName, { provider, methodName });
 	}
 }

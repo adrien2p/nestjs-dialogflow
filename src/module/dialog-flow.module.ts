@@ -11,11 +11,13 @@ import {
 import { WebHookConfig } from '../interfaces/web-hook-config.interface';
 import { ModulesContainer } from '@nestjs/core/injector';
 import { MetadataScanner } from '@nestjs/core/metadata-scanner';
+import {ModuleRef} from '@nestjs/core';
 import { DIALOG_FLOW_ACTION, DIALOG_FLOW_INTENT, nestMetadata } from '../constant';
 import 'reflect-metadata';
 
 @Module({
 	providers: [DialogFlowService],
+	controllers: [DialogFlowController],
 })
 export class DialogFlowModule implements NestModule, OnModuleInit {
 	public static forRoot(webHookConfig?: WebHookConfig): DynamicModule {
@@ -34,6 +36,7 @@ export class DialogFlowModule implements NestModule, OnModuleInit {
 
 	constructor(
 		private readonly modulesContainer: ModulesContainer,
+		private readonly moduleRef: ModuleRef, 
 		private readonly dialogFlowService: DialogFlowService,
 	) {}
 
@@ -64,7 +67,7 @@ export class DialogFlowModule implements NestModule, OnModuleInit {
 				[...reflectedMetadata].forEach(metadata => {
 					this.dialogFlowService.addHandler(
 						metadata.intentOrAction,
-						metadata.provider,
+						this.moduleRef.get(metadata.provider, {strict: false}),
 						metadata.method,
 					);
 				});

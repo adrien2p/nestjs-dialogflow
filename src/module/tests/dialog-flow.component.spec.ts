@@ -29,6 +29,7 @@ describe('dialog flow service', () => {
         await app.init();
 
         dialogFlowService = module.get<DialogFlowService>(DialogFlowService);
+
     });
 
     it('should return a fulfillment response', async () => {
