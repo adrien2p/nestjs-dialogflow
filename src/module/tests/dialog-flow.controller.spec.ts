@@ -4,7 +4,6 @@ import { DialogFlowController } from '../dialog-flow.controller';
 import { DialogFlowFulfillmentResponse } from '../../interfaces/dialog-flow-fulfillment-response.interface';
 import { DialogFlowIntent } from '../../decorators/dialog-flow-intent.decorator';
 import { DialogFlowResponse } from '../../interfaces/dialog-flow-response.interface';
-import { DialogFlowService } from '../dialog-flow.component';
 import { METHOD_METADATA, PATH_METADATA } from '../../constant';
 import { mockRes } from 'sinon-express-mock';
 import { Test } from '@nestjs/testing';
