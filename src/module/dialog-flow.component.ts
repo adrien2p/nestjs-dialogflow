@@ -29,14 +29,6 @@ export class DialogFlowService {
 			);
 		}
 
-		if (matchedHandlers.length > 1) {
-			throw new Error(
-				`Unable to process multiple handlers [${matchedHandlers
-					.map((handler, key) => key)
-					.join(', ')}]`,
-			);
-		}
-
 		const { provider, methodName } = matchedHandlers.pop();
 
 		const fulfillment = await provider[methodName](dialogFlowResponse);
@@ -44,6 +36,9 @@ export class DialogFlowService {
 	}
 
 	public addHandler(handlerName: string, provider: Provider, methodName: string) {
+		if (this.handlers.has(handlerName)) {
+			throw Error(`Cannot have duplicate handlers for intent [${handlerName}]`);
+		}
 		this.handlers.set(handlerName, { provider, methodName });
 	}
 }

@@ -1,10 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { DialogFlowFulfillmentResponse } from '../../interfaces/dialog-flow-fulfillment-response.interface';
 import { DialogFlowIntent } from '../../decorators/dialog-flow-intent.decorator';
+import { DialogFlowAction } from '../../decorators/dialog-flow-action.decorator';
 import { DialogFlowResponse } from '../../interfaces/dialog-flow-response.interface';
 import { DialogFlowService } from '../dialog-flow.component';
 import {DialogFlowModule} from '../dialog-flow.module';
-import { Test } from '@nestjs/testing';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('dialog flow service', () => {
     let dialogFlowService: DialogFlowService;
@@ -54,5 +55,46 @@ describe('dialog flow service', () => {
 
     afterAll(async () => {
         await app.close();
+    });
+});
+
+describe('Dialog Flow Handlers', () => {
+    it('Duplicate handler exception',async  () => {
+
+        @Injectable()
+        class ExpectionService {
+        
+            @DialogFlowAction('duplicate')
+            public handlerAction() {
+                return { fulfillmentText: 'fulfilled' } as DialogFlowFulfillmentResponse;
+            }
+
+            @DialogFlowIntent('duplicate')
+            public handlerIntent() {
+                return { fulfillmentText: 'fulfilled' } as DialogFlowFulfillmentResponse;
+            }
+        }
+
+        let error;
+        let app;
+
+        try {
+           const module: TestingModule = await Test.createTestingModule({
+                imports: [DialogFlowModule.forRoot()],
+                providers: [ExpectionService],
+            }).compile();
+
+            app = module.createNestApplication();
+
+            await app.init();
+
+        } catch(e) {
+            error = e;
+        }
+
+        expect(error).not.toBeNull();
+        expect(error.message).toEqual('Cannot have duplicate handlers for intent [duplicate]');
+
+        app.close();
     });
 });
