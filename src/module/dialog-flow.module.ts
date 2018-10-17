@@ -45,6 +45,6 @@ export class DialogFlowModule implements NestModule, OnModuleInit {
 	}
 
 	public configure(consumer: MiddlewareConsumer) {
-		return consumer.apply([DialogFlowAuthorizationMiddleware]).forRoutes(DialogFlowController);
+		return consumer.apply(DialogFlowAuthorizationMiddleware).forRoutes(DialogFlowController);
 	}
 }

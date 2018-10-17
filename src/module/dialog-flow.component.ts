@@ -5,7 +5,6 @@ import { HandlerContainer } from './../core';
 
 @Injectable()
 export class DialogFlowService {
-
 	constructor(private readonly handlerContainer: HandlerContainer) {}
 
 	public async handleIntentOrAction(
