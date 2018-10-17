@@ -1,2 +1,2 @@
 export * from './scanner';
-export * from './handler.container';
+export * from './handlers';

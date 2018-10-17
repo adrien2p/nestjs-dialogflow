@@ -1,6 +1,6 @@
 import { ModuleRef } from '@nestjs/core';
 import { ModulesContainer } from '@nestjs/core/injector';
-import { HandlerContainer } from './handler.container';
+import { HandlerContainer } from './handlers';
 import { MetadataScanner } from '@nestjs/core/metadata-scanner';
 import { nestMetadata, DIALOG_FLOW_ACTION, DIALOG_FLOW_INTENT } from '../constant';
 
@@ -33,7 +33,7 @@ export class Scanner {
 							);
 						return intentOrAction ? { component, intentOrAction, methodName } : null;
 					})
-          .filter(v => v);
+					.filter(v => v);
 
 				[...reflectedMetadata].forEach(metadata => {
 					this.handlerContainer.register(
