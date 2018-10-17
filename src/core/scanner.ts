@@ -1,6 +1,6 @@
 import { ModuleRef } from '@nestjs/core';
 import { ModulesContainer } from '@nestjs/core/injector';
-import { HandlerContainer } from './dialog-flow.handler.container';
+import { HandlerContainer } from './handler.container';
 import { MetadataScanner } from '@nestjs/core/metadata-scanner';
 import { nestMetadata, DIALOG_FLOW_ACTION, DIALOG_FLOW_INTENT } from '../constant';
 

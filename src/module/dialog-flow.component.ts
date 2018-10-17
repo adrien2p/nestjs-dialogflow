@@ -1,7 +1,7 @@
 import { Injectable, Provider } from '@nestjs/common';
 import { DialogFlowFulfillmentResponse } from '../interfaces/dialog-flow-fulfillment-response.interface';
 import { DialogFlowResponse } from '../interfaces/dialog-flow-response.interface';
-import { HandlerContainer } from './dialog-flow.handler.container';
+import { HandlerContainer } from './../core';
 
 @Injectable()
 export class DialogFlowService {

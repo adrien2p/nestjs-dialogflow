@@ -12,8 +12,7 @@ import { WebHookConfig } from '../interfaces/web-hook-config.interface';
 import { ModulesContainer } from '@nestjs/core/injector';
 import { ModuleRef } from '@nestjs/core';
 import 'reflect-metadata';
-import { Scanner } from './dialog-flow.scanner';
-import { HandlerContainer } from './dialog-flow.handler.container';
+import { Scanner, HandlerContainer } from './../core';
 
 @Module({
 	providers: [DialogFlowService, HandlerContainer],
