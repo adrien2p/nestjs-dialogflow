@@ -4,29 +4,29 @@ import { DialogFlowResponse } from '../interfaces/dialog-flow-response.interface
 
 @Injectable()
 export class HandlerContainer {
-	private container: Map<string, { provider: Provider; methodName: string }[]> = new Map();
+	private container: Map<string, { provider: Provider; methodName: string }> = new Map();
 
 	public register(actionOrIntent: string, provider: Provider, methodName: string): void {
-		const registeredHandlers = this.container.get(actionOrIntent) || [];
-		registeredHandlers.push({ provider, methodName });
-		this.container.set(actionOrIntent, registeredHandlers);
+    const registeredHandler = this.container.get(actionOrIntent);
+    
+    if (registeredHandler) {
+      throw new Error(`Cannot have duplicate handlers for intent [${actionOrIntent}]`);
+    }
+
+		this.container.set(actionOrIntent, {provider, methodName});
 	}
 
 	public async findAndCallHandlers(
 		actionOrIntent: string,
 		dialogFlowResponse: DialogFlowResponse,
 	): Promise<DialogFlowFulfillmentResponse> {
-		const registeredHandlers = this.container.get(actionOrIntent);
+		const registeredHandler = this.container.get(actionOrIntent);
 
-		if (!registeredHandlers) {
-			throw new Error(`Unknown handler for ${actionOrIntent}.`);
+		if (!registeredHandler) {
+			throw new Error(`Unknown handler for [${actionOrIntent}].`);
 		}
 
-		if (registeredHandlers.length > 1) {
-			throw new Error(`Multiple handler found for ${actionOrIntent}`);
-		}
-
-		const { provider, methodName } = registeredHandlers.pop();
+		const { provider, methodName } = registeredHandler;
 
 		return await provider[methodName](dialogFlowResponse);
 	}

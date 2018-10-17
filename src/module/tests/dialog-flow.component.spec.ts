@@ -50,7 +50,7 @@ describe('dialog flow service', () => {
         }
 
         expect(error).not.toEqual(null);
-        expect(error.message).toEqual('Unknown handler for intent: intent2.');
+        expect(error.message).toEqual('Unknown handler for [intent2].');
     });
 
     afterAll(async () => {
