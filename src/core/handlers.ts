@@ -22,10 +22,7 @@ export class HandlerContainer {
 			throw new Error(`Unknown handler for [${actionOrIntent}].`);
 		}
 
-		const registeredHandler = this.container.get(actionOrIntent);
-
-		const { provider, methodName } = registeredHandler;
-
+		const { provider, methodName } = this.container.get(actionOrIntent);
 		return await provider[methodName](dialogFlowResponse);
 	}
 }

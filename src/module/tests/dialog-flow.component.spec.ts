@@ -26,7 +26,6 @@ describe('dialog flow service', () => {
         }).compile();
 
         app = module.createNestApplication();
-
         await app.init();
 
         dialogFlowService = module.get<DialogFlowService>(DialogFlowService);
