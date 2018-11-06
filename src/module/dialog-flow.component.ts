@@ -13,7 +13,10 @@ export class DialogFlowService {
 		const intent = dialogFlowResponse.queryResult.intent.displayName;
 		const action = dialogFlowResponse.queryResult.action;
 
-		const fulfillment = this.handlerContainer.findAndCallHandlers(intent, dialogFlowResponse);
+		const fulfillment = this.handlerContainer.findAndCallHandlers(dialogFlowResponse, {
+			intent,
+			action,
+		});
 		return fulfillment as DialogFlowFulfillmentResponse;
 	}
 }

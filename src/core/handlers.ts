@@ -6,6 +6,8 @@ import { DialogFlowResponse } from '../interfaces/dialog-flow-response.interface
 export class HandlerContainer {
 	private container: Map<string, { provider: Provider; methodName: string }> = new Map();
 
+	constructor() {}
+
 	public register(actionOrIntent: string, provider: Provider, methodName: string): void {
 		if (this.container.has(actionOrIntent)) {
 			throw new Error(`Cannot have duplicate handlers for intent [${actionOrIntent}]`);
@@ -15,14 +17,14 @@ export class HandlerContainer {
 	}
 
 	public async findAndCallHandlers(
-		actionOrIntent: string,
 		dialogFlowResponse: DialogFlowResponse,
+		{ intent, action }: { intent: string; action: string },
 	): Promise<DialogFlowFulfillmentResponse> {
-		if (!this.container.has(actionOrIntent)) {
-			throw new Error(`Unknown handler for [${actionOrIntent}].`);
+		if (!this.container.has(intent) && !this.container.has(action)) {
+			throw new Error(`Unknown handler for [intent: ${intent}, action: ${action}].`);
 		}
 
-		const { provider, methodName } = this.container.get(actionOrIntent);
+		const { provider, methodName } = this.container.get(intent) || this.container.get(action);
 		return await provider[methodName](dialogFlowResponse);
 	}
 }

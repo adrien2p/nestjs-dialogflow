@@ -5,7 +5,7 @@ import { DIALOG_FLOW_ACTION, DIALOG_FLOW_PARAMS } from '../constant';
 export const DialogFlowAction = (action: string) => {
 	return (target: Object, key: string | symbol, descriptor: PropertyDescriptor) => {
 		const originalMethod = descriptor.value;
-		descriptor.value = (...args: any[]) => {
+		descriptor.value = function(...args: any[]) {
 			const paramsMetadata = (Reflect.getMetadata(DIALOG_FLOW_PARAMS, target) || []).filter(p => {
 				return p.key === key;
 			});
