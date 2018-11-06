@@ -21,7 +21,11 @@ export class HandlerContainer {
 		{ intent, action }: { intent: string; action: string },
 	): Promise<DialogFlowFulfillmentResponse> {
 		if (!this.container.has(intent) && !this.container.has(action)) {
-			throw new Error(`Unknown handler for [intent: ${intent}, action: ${action}].`);
+			throw new Error(
+				`Unknown handler for ${intent ? '[intent: ' + intent + ']' : ''}${
+					action ? '[action: ' + action + ']' : ''
+				}.`,
+			);
 		}
 
 		const { provider, methodName } = this.container.get(intent) || this.container.get(action);

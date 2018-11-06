@@ -1,10 +1,10 @@
-import { Injectable, Provider } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { DialogFlowFulfillmentResponse } from '../interfaces/dialog-flow-fulfillment-response.interface';
 import { DialogFlowResponse } from '../interfaces/dialog-flow-response.interface';
 import { HandlerContainer } from './../core';
 
 @Injectable()
-export class DialogFlowService {
+export class DialogFlowComponent {
 	constructor(private readonly handlerContainer: HandlerContainer) {}
 
 	public async handleIntentOrAction(

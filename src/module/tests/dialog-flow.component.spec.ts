@@ -3,12 +3,12 @@ import { DialogFlowFulfillmentResponse } from '../../interfaces/dialog-flow-fulf
 import { DialogFlowIntent } from '../../decorators/dialog-flow-intent.decorator';
 import { DialogFlowAction } from '../../decorators/dialog-flow-action.decorator';
 import { DialogFlowResponse } from '../../interfaces/dialog-flow-response.interface';
-import { DialogFlowService } from '../dialog-flow.component';
-import {DialogFlowModule} from '../dialog-flow.module';
+import { DialogFlowComponent } from '../dialog-flow.component';
+import { DialogFlowModule } from '../dialog-flow.module';
 import { Test, TestingModule } from '@nestjs/testing';
 
 describe('dialog flow service', () => {
-    let dialogFlowService: DialogFlowService;
+    let dialogFlowComponent: DialogFlowComponent;
     let app;
 
     @Injectable()
@@ -28,13 +28,13 @@ describe('dialog flow service', () => {
         app = module.createNestApplication();
         await app.init();
 
-        dialogFlowService = module.get<DialogFlowService>(DialogFlowService);
+        dialogFlowComponent = module.get<DialogFlowComponent>(DialogFlowComponent);
 
     });
 
     it('should return a fulfillment response', async () => {
         const dialogFlowResponse = { queryResult: { intent: { displayName: 'intent' } } } as DialogFlowResponse;
-        const fulfillment = await dialogFlowService.handleIntentOrAction(dialogFlowResponse);
+        const fulfillment = await dialogFlowComponent.handleIntentOrAction(dialogFlowResponse);
         expect(fulfillment).toEqual({ fulfillmentText: 'fulfilled' });
     });
 
@@ -43,13 +43,13 @@ describe('dialog flow service', () => {
 
         let error;
         try {
-            await dialogFlowService.handleIntentOrAction(dialogFlowResponse);
+            await dialogFlowComponent.handleIntentOrAction(dialogFlowResponse);
         } catch (e) {
             error = e;
         }
 
         expect(error).not.toEqual(null);
-        expect(error.message).toEqual('Unknown handler for [intent2].');
+        expect(error.message).toEqual('Unknown handler for [intent: intent2].');
     });
 
     afterAll(async () => {
@@ -58,11 +58,11 @@ describe('dialog flow service', () => {
 });
 
 describe('Dialog Flow Handlers', () => {
-    it('Duplicate handler exception',async  () => {
+    it('Duplicate handler exception', async () => {
 
         @Injectable()
         class ExpectionService {
-        
+
             @DialogFlowAction('duplicate')
             public handlerAction() {
                 return { fulfillmentText: 'fulfilled' } as DialogFlowFulfillmentResponse;
@@ -78,7 +78,7 @@ describe('Dialog Flow Handlers', () => {
         let app;
 
         try {
-           const module: TestingModule = await Test.createTestingModule({
+            const module: TestingModule = await Test.createTestingModule({
                 imports: [DialogFlowModule.forRoot()],
                 providers: [ExpectionService],
             }).compile();
@@ -87,7 +87,7 @@ describe('Dialog Flow Handlers', () => {
 
             await app.init();
 
-        } catch(e) {
+        } catch (e) {
             error = e;
         }
 
