@@ -45,14 +45,14 @@ Update library to be used with nestjs V5
 
 ### Add
 
-* `DialogFlowService` in order to handle the controller logic and dispatch intent
+* `DialogFlowComponent` in order to handle the controller logic and dispatch intent
 * tests in order to have well test suite
   * `Decorators/` tested
   * `module/[provider, component, controller]` tested
   
 ### Update
 
-* `DialogFlowController` logic now delegated to the `DialogFlowService`
+* `DialogFlowController` logic now delegated to the `DialogFlowComponent`
 
 ### Fixes
 

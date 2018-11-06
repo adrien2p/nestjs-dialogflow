@@ -1,6 +1,6 @@
+import { HandlerContainer } from './handlers';
 import { ModuleRef } from '@nestjs/core';
 import { ModulesContainer } from '@nestjs/core/injector';
-import { HandlerContainer } from './handlers';
 export declare class Scanner {
     private readonly moduleRef;
     private readonly modulesContainer;

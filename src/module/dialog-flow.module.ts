@@ -1,6 +1,7 @@
+import 'reflect-metadata';
 import { DialogFlowAuthorizationMiddleware } from '../middlewares/dialog-flow-authorization.middleware';
 import { DialogFlowController } from './dialog-flow.controller';
-import { DialogFlowService } from './dialog-flow.component';
+import { DialogFlowComponent } from './dialog-flow.component';
 import {
 	DynamicModule,
 	MiddlewareConsumer,
@@ -8,14 +9,13 @@ import {
 	NestModule,
 	OnModuleInit,
 } from '@nestjs/common';
-import { WebHookConfig } from '../interfaces/web-hook-config.interface';
-import { ModulesContainer } from '@nestjs/core/injector';
 import { ModuleRef } from '@nestjs/core';
-import 'reflect-metadata';
-import { Scanner, HandlerContainer } from './../core';
+import { ModulesContainer } from '@nestjs/core/injector';
+import { Scanner, HandlerContainer } from '../core';
+import { WebHookConfig } from '../interfaces/web-hook-config.interface';
 
 @Module({
-	providers: [DialogFlowService, HandlerContainer],
+	providers: [DialogFlowComponent, HandlerContainer],
 	controllers: [DialogFlowController],
 })
 export class DialogFlowModule implements NestModule, OnModuleInit {
@@ -28,14 +28,14 @@ export class DialogFlowModule implements NestModule, OnModuleInit {
 
 		return {
 			module: DialogFlowModule,
-			providers: [DialogFlowService, HandlerContainer],
+			providers: [DialogFlowComponent, HandlerContainer],
 			controllers: [DialogFlowController.forRoot(webHookConfig)],
 		};
 	}
 
 	constructor(
-		private readonly modulesContainer: ModulesContainer,
 		private readonly moduleRef: ModuleRef,
+		private readonly modulesContainer: ModulesContainer,
 		private readonly handlerContainer: HandlerContainer,
 	) {}
 

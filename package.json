@@ -58,7 +58,7 @@
     "typescript": "^2.8.3"
   },
   "peerDependencies": {
-    "@nestjs/common": "^5.0.1",
-    "@nestjs/core": "^^5.0.1"
+    "@nestjs/common": ">=5.0.1",
+    "@nestjs/core": ">=5.0.1"
   }
 }

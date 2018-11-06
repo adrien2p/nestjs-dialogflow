@@ -3,6 +3,10 @@ import { DialogFlowFulfillmentResponse } from '../interfaces/dialog-flow-fulfill
 import { DialogFlowResponse } from '../interfaces/dialog-flow-response.interface';
 export declare class HandlerContainer {
     private container;
+    constructor();
     register(actionOrIntent: string, provider: Provider, methodName: string): void;
-    findAndCallHandlers(actionOrIntent: string, dialogFlowResponse: DialogFlowResponse): Promise<DialogFlowFulfillmentResponse>;
+    findAndCallHandlers(dialogFlowResponse: DialogFlowResponse, { intent, action }: {
+        intent: string;
+        action: string;
+    }): Promise<DialogFlowFulfillmentResponse>;
 }
