@@ -1,14 +1,14 @@
-import { Injectable, Provider } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { DialogFlowFulfillmentResponse } from '../interfaces/dialog-flow-fulfillment-response.interface';
 import { DialogFlowResponse } from '../interfaces/dialog-flow-response.interface';
 
 @Injectable()
 export class HandlerContainer {
-	private container: Map<string, { provider: Provider; methodName: string }> = new Map();
+	private container: Map<string, { provider: any; methodName: string }> = new Map();
 
 	constructor() {}
 
-	public register(actionOrIntent: string, provider: Provider, methodName: string): void {
+	public register(actionOrIntent: string, provider: any, methodName: string): void {
 		if (this.container.has(actionOrIntent)) {
 			throw new Error(`Cannot have duplicate handlers for intent [${actionOrIntent}]`);
 		}

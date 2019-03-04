@@ -4,7 +4,7 @@ import { DialogFlowResponse } from '../interfaces/dialog-flow-response.interface
 import { HandlerContainer } from './../core';
 
 @Injectable()
-export class DialogFlowComponent {
+export class DialogFlowProvider {
 	constructor(private readonly handlerContainer: HandlerContainer) {}
 
 	public async handleIntentOrAction(

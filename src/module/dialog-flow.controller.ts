@@ -1,12 +1,12 @@
 import { Body, Controller, HttpStatus, RequestMethod, Res } from '@nestjs/common';
 import { DialogFlowResponse } from '../interfaces/dialog-flow-response.interface';
-import { DialogFlowComponent } from './dialog-flow.component';
+import { DialogFlowProvider } from './dialog-flow.provider';
 import { METHOD_METADATA, PATH_METADATA } from '../constant';
 import { WebHookConfig } from '../interfaces/web-hook-config.interface';
 
 @Controller()
 export class DialogFlowController {
-	constructor(private readonly DialogFlowComponent: DialogFlowComponent) {}
+	constructor(private readonly dialogFlowProvider: DialogFlowProvider) {}
 
 	public static forRoot(webHookConfig: WebHookConfig) {
 		Reflect.defineMetadata(PATH_METADATA, webHookConfig.basePath, DialogFlowController);
@@ -24,7 +24,7 @@ export class DialogFlowController {
 	}
 
 	async dialogFlowWebHook(@Body() dialogFlowResponse: DialogFlowResponse, @Res() res) {
-		const fulfillment = await this.DialogFlowComponent.handleIntentOrAction(dialogFlowResponse);
+		const fulfillment = await this.dialogFlowProvider.handleIntentOrAction(dialogFlowResponse);
 		return res.status(HttpStatus.OK).send(fulfillment);
 	}
 }
