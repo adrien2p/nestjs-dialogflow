@@ -1,14 +1,14 @@
 import { Injectable } from '@nestjs/common';
-import { DialogFlowFulfillmentResponse } from '../../interfaces/dialog-flow-fulfillment-response.interface';
-import { DialogFlowIntent } from '../../decorators/dialog-flow-intent.decorator';
-import { DialogFlowAction } from '../../decorators/dialog-flow-action.decorator';
-import { DialogFlowResponse } from '../../interfaces/dialog-flow-response.interface';
-import { DialogFlowComponent } from '../dialog-flow.component';
-import { DialogFlowModule } from '../dialog-flow.module';
+import { DialogFlowFulfillmentResponse } from '../src/interfaces/dialog-flow-fulfillment-response.interface';
+import { DialogFlowIntent } from '../src/decorators/dialog-flow-intent.decorator';
+import { DialogFlowAction } from '../src/decorators/dialog-flow-action.decorator';
+import { DialogFlowResponse } from '../src/interfaces/dialog-flow-response.interface';
+import { DialogFlowProvider } from '../src/module/dialog-flow.provider';
+import { DialogFlowModule } from '../src/module/dialog-flow.module';
 import { Test, TestingModule } from '@nestjs/testing';
 
 describe('dialog flow service', () => {
-    let dialogFlowComponent: DialogFlowComponent;
+    let dialogFlowProvider: DialogFlowProvider;
     let app;
 
     @Injectable()
@@ -28,13 +28,13 @@ describe('dialog flow service', () => {
         app = module.createNestApplication();
         await app.init();
 
-        dialogFlowComponent = module.get<DialogFlowComponent>(DialogFlowComponent);
+        dialogFlowProvider = module.get<DialogFlowProvider>(DialogFlowProvider);
 
     });
 
     it('should return a fulfillment response', async () => {
         const dialogFlowResponse = { queryResult: { intent: { displayName: 'intent' } } } as DialogFlowResponse;
-        const fulfillment = await dialogFlowComponent.handleIntentOrAction(dialogFlowResponse);
+        const fulfillment = await dialogFlowProvider.handleIntentOrAction(dialogFlowResponse);
         expect(fulfillment).toEqual({ fulfillmentText: 'fulfilled' });
     });
 
@@ -43,7 +43,7 @@ describe('dialog flow service', () => {
 
         let error;
         try {
-            await dialogFlowComponent.handleIntentOrAction(dialogFlowResponse);
+            await dialogFlowProvider.handleIntentOrAction(dialogFlowResponse);
         } catch (e) {
             error = e;
         }

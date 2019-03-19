@@ -1,7 +1,9 @@
 import 'reflect-metadata';
+import { DIALOG_FLOW_ACTION, DIALOG_FLOW_INTENT } from '../constant';
 import { DialogFlowAuthorizationMiddleware } from '../middlewares/dialog-flow-authorization.middleware';
 import { DialogFlowController } from './dialog-flow.controller';
-import { DialogFlowComponent } from './dialog-flow.component';
+import { DialogFlowProvider } from './dialog-flow.provider';
+import { DiscoveryModule, DiscoveryService } from '@nestjs-plus/discovery';
 import {
 	DynamicModule,
 	MiddlewareConsumer,
@@ -9,13 +11,12 @@ import {
 	NestModule,
 	OnModuleInit,
 } from '@nestjs/common';
-import { ModuleRef } from '@nestjs/core';
-import { ModulesContainer } from '@nestjs/core/injector';
-import { Scanner, HandlerContainer } from '../core';
+import { HandlerContainer } from '../core';
 import { WebHookConfig } from '../interfaces/web-hook-config.interface';
 
 @Module({
-	providers: [DialogFlowComponent, HandlerContainer],
+	modules: [DiscoveryModule],
+	providers: [DialogFlowProvider, HandlerContainer],
 	controllers: [DialogFlowController],
 })
 export class DialogFlowModule implements NestModule, OnModuleInit {
@@ -28,20 +29,36 @@ export class DialogFlowModule implements NestModule, OnModuleInit {
 
 		return {
 			module: DialogFlowModule,
-			providers: [DialogFlowComponent, HandlerContainer],
+			providers: [DialogFlowProvider, HandlerContainer],
 			controllers: [DialogFlowController.forRoot(webHookConfig)],
 		};
 	}
 
 	constructor(
-		private readonly moduleRef: ModuleRef,
-		private readonly modulesContainer: ModulesContainer,
+		private readonly discoveryService: DiscoveryService,
 		private readonly handlerContainer: HandlerContainer,
 	) {}
 
-	public onModuleInit(): any {
-		const scanner = new Scanner(this.moduleRef, this.modulesContainer, this.handlerContainer);
-		scanner.scanAndRegisterHandlers();
+	public async onModuleInit(): Promise<void> {
+		const providersMethodAndMetaForIntent = await this.discoveryService.providerMethodsWithMetaAtKey<
+			string
+		>(DIALOG_FLOW_INTENT);
+		const providersMethodAndMetaForAction = await this.discoveryService.providerMethodsWithMetaAtKey<
+			string
+		>(DIALOG_FLOW_ACTION);
+
+		const providersMethodAndMeta = [
+			...providersMethodAndMetaForIntent,
+			...providersMethodAndMetaForAction,
+		];
+
+		for (const providerMethodAndMeta of providersMethodAndMeta) {
+			this.handlerContainer.register(
+				providerMethodAndMeta.meta,
+				providerMethodAndMeta.discoveredMethod.parentClass.instance,
+				providerMethodAndMeta.discoveredMethod.methodName,
+			);
+		}
 	}
 
 	public configure(consumer: MiddlewareConsumer) {

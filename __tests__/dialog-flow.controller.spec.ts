@@ -1,14 +1,14 @@
 import 'reflect-metadata';
 import { Injectable, RequestMethod } from '@nestjs/common';
-import { DialogFlowController } from '../dialog-flow.controller';
-import { DialogFlowFulfillmentResponse } from '../../interfaces/dialog-flow-fulfillment-response.interface';
-import { DialogFlowIntent } from '../../decorators/dialog-flow-intent.decorator';
-import { DialogFlowResponse } from '../../interfaces/dialog-flow-response.interface';
-import { METHOD_METADATA, PATH_METADATA } from '../../constant';
+import { DialogFlowController } from '../src/module/dialog-flow.controller';
+import { DialogFlowFulfillmentResponse } from '../src/interfaces/dialog-flow-fulfillment-response.interface';
+import { DialogFlowIntent } from '../src/decorators/dialog-flow-intent.decorator';
+import { DialogFlowResponse } from '../src/interfaces/dialog-flow-response.interface';
+import { METHOD_METADATA, PATH_METADATA } from '../src/constant';
 import { mockRes } from 'sinon-express-mock';
 import { Test } from '@nestjs/testing';
-import { WebHookConfig } from '../../interfaces/web-hook-config.interface';
-import { DialogFlowModule } from '../dialog-flow.module';
+import { WebHookConfig } from '../src/interfaces/web-hook-config.interface';
+import { DialogFlowModule } from '../src/module/dialog-flow.module';
 
 describe('dialog flow controller', () => {
     const webHookConfig: WebHookConfig = { basePath: 'basePath', postPath: 'postPath' };
