@@ -15,7 +15,7 @@ import { HandlerContainer } from '../core';
 import { WebHookConfig } from '../interfaces/web-hook-config.interface';
 
 @Module({
-	modules: [DiscoveryModule],
+	imports: [DiscoveryModule],
 	providers: [DialogFlowProvider, HandlerContainer],
 	controllers: [DialogFlowController],
 })

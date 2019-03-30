@@ -49,14 +49,14 @@ Update library to be used with nestjs V5
 
 ### Add
 
-* `DialogFlowComponent` in order to handle the controller logic and dispatch intent
+* `DialogFlowProvider` in order to handle the controller logic and dispatch intent
 * tests in order to have well test suite
   * `Decorators/` tested
-  * `module/[provider, component, controller]` tested
+  * `module/[provider, provider, controller]` tested
   
 ### Update
 
-* `DialogFlowController` logic now delegated to the `DialogFlowComponent`
+* `DialogFlowController` logic now delegated to the `DialogFlowProvider`
 
 ### Fixes
 
@@ -118,7 +118,7 @@ Change project name.
   * `@DialogFlowAction()` decorator to define the concerned action instead of the intent
 * `DialogFlowModule` Which provide the features
   * `DialogFlowController` configurable controller through `DialogFlowModule.forRoute(webHookConfig)`
-  * `Handlers` provider which get the metadata from the components in order to store and return the handlers map
+  * `Handlers` provider which get the metadata from the providers in order to store and return the handlers map
 * Some interfaces to defined the response get from `DialogFlow` and the expected result await by `Dialogflow`
   * `DialogFlowFulfilmentResponse` which defined the expected response await by `DialogFlow`
   * `DialogFlowResponse` the response sent from `DialogFlow` and pass as argument to the handler

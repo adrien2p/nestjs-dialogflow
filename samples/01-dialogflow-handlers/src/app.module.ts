@@ -1,10 +1,10 @@
-import { AppComponent } from './app.component';
+import { AppProvider } from './app.provider';
 import { DialogFlowModule } from 'nestjs-dialogflow';
 import { Module } from '@nestjs/common';
-import { AppComponent2 } from './app.component2';
+import { AppProvider2 } from './app.provider2';
 
 @Module({
     imports: [DialogFlowModule.forRoot()],
-    providers: [AppComponent, AppComponent2]
+    providers: [AppProvider, AppProvider2]
 })
 export class AppModule {}

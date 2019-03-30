@@ -52,7 +52,7 @@ the concerned intents/action.
 
 ```ts
 @Injectable()
-export class MyDialogFlowComponent {
+export class MyDialogFlowProvider {
     
     @DialogFlowIntent('My:intent1')
     public async handleMyIntent1(dialogFlowResponse: DialogFlowResponse): Promise<DialogFlowFulfillmentResponse> {
@@ -75,7 +75,7 @@ the property that you want to pick.
 
 ```ts
 @Injectable()
-export class MyDialogFlowComponent {
+export class MyDialogFlowProvider {
     
     @DialogFlowIntent('My:intent1')
     public async handleMyIntent1(@DialogFlowParam('queryResult.outputContexts') outputContexts: OutputContexts): Promise<DialogFlowFulfillmentResponse> {

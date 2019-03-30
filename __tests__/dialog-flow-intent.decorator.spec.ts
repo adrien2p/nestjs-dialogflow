@@ -1,6 +1,6 @@
 import 'reflect-metadata'
-import { DIALOG_FLOW_INTENT } from '../../constant';
-import { DialogFlowIntent } from '../dialog-flow-intent.decorator';
+import { DIALOG_FLOW_INTENT } from '../src/constant';
+import { DialogFlowIntent } from '../src/decorators/dialog-flow-intent.decorator';
 import { expect } from 'chai';
 
 describe('@DialogFlowIntent', () => {

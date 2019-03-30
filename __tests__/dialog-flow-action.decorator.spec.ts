@@ -1,6 +1,6 @@
 import 'reflect-metadata'
-import { DIALOG_FLOW_ACTION } from '../../constant';
-import { DialogFlowAction } from '../dialog-flow-action.decorator';
+import { DIALOG_FLOW_ACTION } from '../src/constant';
+import { DialogFlowAction } from '../src/decorators/dialog-flow-action.decorator';
 import { expect } from 'chai';
 
 describe('@DialogFlowAction', () => {
