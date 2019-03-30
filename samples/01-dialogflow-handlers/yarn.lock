@@ -755,17 +755,17 @@ combined-stream@^1.0.5, combined-stream@~1.0.5:
   dependencies:
     delayed-stream "~1.0.0"
 
-component-bind@1.0.0:
+provider-bind@1.0.0:
   version "1.0.0"
-  resolved "https://registry.yarnpkg.com/component-bind/-/component-bind-1.0.0.tgz#00c608ab7dcd93897c0009651b1d3a8e1e73bbd1"
+  resolved "https://registry.yarnpkg.com/provider-bind/-/provider-bind-1.0.0.tgz#00c608ab7dcd93897c0009651b1d3a8e1e73bbd1"
 
-component-emitter@1.2.1, component-emitter@^1.2.0:
+provider-emitter@1.2.1, provider-emitter@^1.2.0:
   version "1.2.1"
-  resolved "https://registry.yarnpkg.com/component-emitter/-/component-emitter-1.2.1.tgz#137918d6d78283f7df7a6b7c5a63e140e69425e6"
+  resolved "https://registry.yarnpkg.com/provider-emitter/-/provider-emitter-1.2.1.tgz#137918d6d78283f7df7a6b7c5a63e140e69425e6"
 
-component-inherit@0.0.3:
+provider-inherit@0.0.3:
   version "0.0.3"
-  resolved "https://registry.yarnpkg.com/component-inherit/-/component-inherit-0.0.3.tgz#645fc4adf58b72b649d5cae65135619db26ff143"
+  resolved "https://registry.yarnpkg.com/provider-inherit/-/provider-inherit-0.0.3.tgz#645fc4adf58b72b649d5cae65135619db26ff143"
 
 concat-map@0.0.1:
   version "0.0.1"
@@ -998,8 +998,8 @@ engine.io-client@~3.1.0:
   version "3.1.4"
   resolved "https://registry.yarnpkg.com/engine.io-client/-/engine.io-client-3.1.4.tgz#4fcf1370b47163bd2ce9be2733972430350d4ea1"
   dependencies:
-    component-emitter "1.2.1"
-    component-inherit "0.0.3"
+    provider-emitter "1.2.1"
+    provider-inherit "0.0.3"
     debug "~2.6.9"
     engine.io-parser "~2.1.1"
     has-cors "1.1.0"
@@ -2611,9 +2611,9 @@ object-assign@^4.1.0:
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/object-assign/-/object-assign-4.1.1.tgz#2109adc7965887cfc05cbbd442cac8bfbb360863"
 
-object-component@0.0.3:
+object-provider@0.0.3:
   version "0.0.3"
-  resolved "https://registry.yarnpkg.com/object-component/-/object-component-0.0.3.tgz#f0c69aa50efc95b866c186f400a33769cb2f1291"
+  resolved "https://registry.yarnpkg.com/object-provider/-/object-provider-0.0.3.tgz#f0c69aa50efc95b866c186f400a33769cb2f1291"
 
 object.omit@^2.0.0:
   version "2.0.1"
@@ -3254,13 +3254,13 @@ socket.io-client@2.0.4:
   dependencies:
     backo2 "1.0.2"
     base64-arraybuffer "0.1.5"
-    component-bind "1.0.0"
-    component-emitter "1.2.1"
+    provider-bind "1.0.0"
+    provider-emitter "1.2.1"
     debug "~2.6.4"
     engine.io-client "~3.1.0"
     has-cors "1.1.0"
     indexof "0.0.1"
-    object-component "0.0.3"
+    object-provider "0.0.3"
     parseqs "0.0.5"
     parseuri "0.0.5"
     socket.io-parser "~3.1.1"
@@ -3270,7 +3270,7 @@ socket.io-parser@~3.1.1:
   version "3.1.2"
   resolved "https://registry.yarnpkg.com/socket.io-parser/-/socket.io-parser-3.1.2.tgz#dbc2282151fc4faebbe40aeedc0772eba619f7f2"
   dependencies:
-    component-emitter "1.2.1"
+    provider-emitter "1.2.1"
     debug "~2.6.4"
     has-binary2 "~1.0.2"
     isarray "2.0.1"
@@ -3435,7 +3435,7 @@ superagent@^3.0.0:
   version "3.8.2"
   resolved "https://registry.yarnpkg.com/superagent/-/superagent-3.8.2.tgz#e4a11b9d047f7d3efeb3bbe536d9ec0021d16403"
   dependencies:
-    component-emitter "^1.2.0"
+    provider-emitter "^1.2.0"
     cookiejar "^2.1.0"
     debug "^3.1.0"
     extend "^3.0.0"

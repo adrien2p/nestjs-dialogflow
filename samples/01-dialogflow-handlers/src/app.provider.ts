@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { AppComponent2 } from './app.component2';
+import { AppProvider2 } from './app.provider2';
 import {
     DialogFlowAction,
     DialogFlowFulfillmentResponse,
@@ -8,12 +8,12 @@ import {
 } from 'nestjs-dialogflow';
 
 @Injectable()
-export class AppComponent {
-    constructor(private appComponent2: AppComponent2) {}
+export class AppProvider {
+    constructor(private appProvider2: AppProvider2) {}
 
     @DialogFlowAction('events.debug')
-    public handleEventDebug(dialogFlowResponse: DialogFlowResponse,): DialogFlowFulfillmentResponse {
-        this.appComponent2.haveBeenCalled('events.debug');
+    public handleEventDebug(dialogFlowResponse: DialogFlowResponse): DialogFlowFulfillmentResponse {
+        this.appProvider2.haveBeenCalled('events.debug');
         return {
             fulfillmentText: 'events.debug action well received.',
             fulfillmentMessages: [],
@@ -21,8 +21,8 @@ export class AppComponent {
     }
 
     @DialogFlowIntent('Event:debug')
-    public handleEventDebug2(dialogFlowResponse: DialogFlowResponse,): DialogFlowFulfillmentResponse {
-        this.appComponent2.haveBeenCalled('Event:debug');
+    public handleEventDebug2(dialogFlowResponse: DialogFlowResponse): DialogFlowFulfillmentResponse {
+        this.appProvider2.haveBeenCalled('Event:debug');
         return {
             fulfillmentText: 'Events:debug intent well received.',
             fulfillmentMessages: [],

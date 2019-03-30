@@ -1,10 +1,10 @@
 import 'reflect-metadata'
-import { DialogFlowAction } from '../dialog-flow-action.decorator';
-import { DialogFlowIntent } from '../dialog-flow-intent.decorator';
-import { DialogFlowParam } from '../dialog-flow-param.decorator';
-import { DialogFlowResponse } from '../../interfaces/dialog-flow-response.interface';
+import { DialogFlowAction } from '../src/decorators/dialog-flow-action.decorator';
+import { DialogFlowIntent } from '../src/decorators/dialog-flow-intent.decorator';
+import { DialogFlowParam } from '../src/decorators/dialog-flow-param.decorator';
+import { DialogFlowResponse } from '../src/interfaces/dialog-flow-response.interface';
 import { dialogFlowResponseData } from './fixtures/data';
-import { OutputContexts, QueryResult } from '../../interfaces/dialog-flow-response.interface';
+import { OutputContexts, QueryResult } from '../src/interfaces/dialog-flow-response.interface';
 
 describe('@DialogFlowParams', () => {
     class TestWithIntentDecorator {
