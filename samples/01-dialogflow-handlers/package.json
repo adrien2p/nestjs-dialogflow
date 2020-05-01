@@ -11,7 +11,9 @@
     "start:prod": "node dist/main.js",
     "test": "jest --config=jest.json",
     "test:cov": "--config=jest.json --coverage --coverageDirectory=coverage",
-    "test:e2e": "jest --config=jest-e2e.json"
+    "test:e2e": "jest --config=jest-e2e.json",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "dependencies": {
     "@nestjs/common": "^5.4.0",
@@ -20,7 +22,8 @@
     "nestjs-dialogflow": "file:../..",
     "reflect-metadata": "^0.1.12",
     "rxjs": "^5.5.6",
-    "typescript": "^2.6.2"
+    "typescript": "^2.6.2",
+    "snyk": "^1.316.1"
   },
   "devDependencies": {
     "@types/express": "^4.0.39",
@@ -35,5 +38,6 @@
     "ts-node": "^4.1.0",
     "tsconfig-paths": "^3.1.1",
     "tslint": "5.3.2"
-  }
+  },
+  "snyk": true
 }
