@@ -5,6 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [3.1.0] - 2021-01-25
+
+Update packages to NestJs V8 - [#63](https://github.com/adrien2p/nestjs-dialogflow/pull/63) Thanks to @vincent-benbria
+
+## [3.0.0] - 2019-03-30
+
+Update package according to the new api of nestjs V6
+Take advantage of discovery module provided by nestjs-plus
+
 ## [2.2.0] - 2019-03-04
 
 Setup DiscoveryModule and cleanup the lib

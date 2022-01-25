@@ -10,4 +10,4 @@ after_success:
       - npm run test:cov
 notifications:
   email:
-    - adrien.deperetti.freelance@gmail.com
+    - adrien.deperetti@gmail.com
