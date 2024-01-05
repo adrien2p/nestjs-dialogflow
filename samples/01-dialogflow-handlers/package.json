@@ -16,7 +16,7 @@
     "prepare": "npm run snyk-protect"
   },
   "dependencies": {
-    "@nestjs/common": "^8.2.6",
+    "@nestjs/common": "^9.0.0",
     "@nestjs/core": "^8.2.6",
     "@nestjs/testing": "^8.2.6",
     "nestjs-dialogflow": "file:../..",
